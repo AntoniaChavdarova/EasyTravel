@@ -16,6 +16,10 @@ namespace EasyTravel.Data.Models
             this.Roles = new HashSet<IdentityUserRole<string>>();
             this.Claims = new HashSet<IdentityUserClaim<string>>();
             this.Logins = new HashSet<IdentityUserLogin<string>>();
+            this.Bookings = new HashSet<Booking>();
+            this.Ratings = new HashSet<Rating>();
+            this.Reviews = new HashSet<Review>();
+            this.ContactForms = new HashSet<ContactForm>();
         }
 
         // Audit info
@@ -33,5 +37,13 @@ namespace EasyTravel.Data.Models
         public virtual ICollection<IdentityUserClaim<string>> Claims { get; set; }
 
         public virtual ICollection<IdentityUserLogin<string>> Logins { get; set; }
+
+        public virtual ICollection<Booking> Bookings { get; set; }
+
+        public virtual ICollection<Review> Reviews { get; set; }
+
+        public virtual ICollection<Rating> Ratings { get; set; }
+
+        public virtual ICollection<ContactForm> ContactForms { get; set; }
     }
 }

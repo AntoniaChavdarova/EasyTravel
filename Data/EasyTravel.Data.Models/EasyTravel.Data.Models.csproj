@@ -20,6 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\EasyTravel.Common\EasyTravel.Common.csproj" />
     <ProjectReference Include="..\EasyTravel.Data.Common\EasyTravel.Data.Common.csproj" />
   </ItemGroup>
   
