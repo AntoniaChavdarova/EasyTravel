@@ -10,13 +10,13 @@
     {
         public Amenity()
         {
-            this.Properties = new HashSet<Property>();
+            this.Properties = new HashSet<PropertyAmenity>();
         }
 
         [Required]
         [MinLength(GlobalConstants.DataValidations.NameMinLength)]
         public string Name { get; set; }
 
-        public ICollection<Property> Properties { get; set; }
+        public ICollection<PropertyAmenity> Properties { get; set; }
     }
 }

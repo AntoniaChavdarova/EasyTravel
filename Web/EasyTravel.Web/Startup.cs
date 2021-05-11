@@ -8,6 +8,7 @@
     using EasyTravel.Data.Models;
     using EasyTravel.Data.Repositories;
     using EasyTravel.Data.Seeding;
+    using EasyTravel.Services;
     using EasyTravel.Services.Data;
     using EasyTravel.Services.Mapping;
     using EasyTravel.Services.Messaging;
@@ -77,6 +78,7 @@
             // Application services
             services.AddTransient<IEmailSender, NullMessageSender>();
             services.AddTransient<ISettingsService, SettingsService>();
+            services.AddTransient<IPochivkaBgScraperService, PochivkaBgScraperService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace EasyTravel.Data.Migrations
 {
-    public partial class CreateMainModels : Migration
+    public partial class CreateMainnModels : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -97,7 +97,7 @@ namespace EasyTravel.Data.Migrations
                     PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CategoryId = table.Column<int>(type: "int", nullable: false),
                     CityId = table.Column<int>(type: "int", nullable: false),
-                    ContactFormId = table.Column<int>(type: "int", nullable: false),
+                    ContactFormId = table.Column<int>(type: "int", nullable: true),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
@@ -122,30 +122,6 @@ namespace EasyTravel.Data.Migrations
                         name: "FK_Properties_ContactForms_ContactFormId",
                         column: x => x.ContactFormId,
                         principalTable: "ContactForms",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "AmenityProperty",
-                columns: table => new
-                {
-                    AmenitiesId = table.Column<int>(type: "int", nullable: false),
-                    PropertiesId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AmenityProperty", x => new { x.AmenitiesId, x.PropertiesId });
-                    table.ForeignKey(
-                        name: "FK_AmenityProperty_Amenities_AmenitiesId",
-                        column: x => x.AmenitiesId,
-                        principalTable: "Amenities",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_AmenityProperty_Properties_PropertiesId",
-                        column: x => x.PropertiesId,
-                        principalTable: "Properties",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -198,6 +174,32 @@ namespace EasyTravel.Data.Migrations
                     table.PrimaryKey("PK_Images", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Images_Properties_PropertyId",
+                        column: x => x.PropertyId,
+                        principalTable: "Properties",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PropertyAmenities",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    PropertyId = table.Column<int>(type: "int", nullable: false),
+                    AmenityId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PropertyAmenities", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_PropertyAmenities_Amenities_AmenityId",
+                        column: x => x.AmenityId,
+                        principalTable: "Amenities",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_PropertyAmenities_Properties_PropertyId",
                         column: x => x.PropertyId,
                         principalTable: "Properties",
                         principalColumn: "Id",
@@ -265,11 +267,6 @@ namespace EasyTravel.Data.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_AmenityProperty_PropertiesId",
-                table: "AmenityProperty",
-                column: "PropertiesId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Bookings_PropertyId",
                 table: "Bookings",
                 column: "PropertyId");
@@ -320,6 +317,16 @@ namespace EasyTravel.Data.Migrations
                 column: "IsDeleted");
 
             migrationBuilder.CreateIndex(
+                name: "IX_PropertyAmenities_AmenityId",
+                table: "PropertyAmenities",
+                column: "AmenityId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PropertyAmenities_PropertyId",
+                table: "PropertyAmenities",
+                column: "PropertyId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Ratings_PropertyId",
                 table: "Ratings",
                 column: "PropertyId");
@@ -348,13 +355,13 @@ namespace EasyTravel.Data.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "AmenityProperty");
-
-            migrationBuilder.DropTable(
                 name: "Bookings");
 
             migrationBuilder.DropTable(
                 name: "Images");
+
+            migrationBuilder.DropTable(
+                name: "PropertyAmenities");
 
             migrationBuilder.DropTable(
                 name: "Ratings");

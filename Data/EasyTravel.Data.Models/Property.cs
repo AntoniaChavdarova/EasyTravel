@@ -12,7 +12,7 @@
     {
         public Property()
         {
-            this.Amenities = new HashSet<Amenity>();
+            this.Amenities = new HashSet<PropertyAmenity>();
             this.Bookings = new HashSet<Booking>();
             this.Images = new HashSet<Image>();
             this.Ratings = new HashSet<Rating>();
@@ -49,7 +49,7 @@
 
         public virtual City City { get; set; }
 
-        public int ContactFormId { get; set; }
+        public int? ContactFormId { get; set; }
 
         public virtual ContactForm ContactForm { get; set; }
 
@@ -59,7 +59,7 @@
 
         public virtual ICollection<Rating> Ratings { get; set; }
 
-        public virtual ICollection<Amenity> Amenities { get; set; }
+        public ICollection<PropertyAmenity> Amenities { get; set; }
 
         public virtual ICollection<Review> Reviews { get; set; }
     }

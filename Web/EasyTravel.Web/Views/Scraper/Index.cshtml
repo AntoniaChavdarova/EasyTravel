@@ -1,0 +1,9 @@
+﻿@using EasyTravel.Common
+@model EasyTravel.Web.ViewModels.Home.IndexViewModel
+@{
+    this.ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <a class="button" asp-controller="Scraper" asp-action="Add">Add Data</a>
+</div>

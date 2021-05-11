@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EasyTravel.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210511111008_CreateMainModels")]
-    partial class CreateMainModels
+    [Migration("20210511183444_CreateMainnModels")]
+    partial class CreateMainnModels
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,21 +20,6 @@ namespace EasyTravel.Data.Migrations
                 .UseIdentityColumns()
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.1");
-
-            modelBuilder.Entity("AmenityProperty", b =>
-                {
-                    b.Property<int>("AmenitiesId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PropertiesId")
-                        .HasColumnType("int");
-
-                    b.HasKey("AmenitiesId", "PropertiesId");
-
-                    b.HasIndex("PropertiesId");
-
-                    b.ToTable("AmenityProperty");
-                });
 
             modelBuilder.Entity("EasyTravel.Data.Models.Amenity", b =>
                 {
@@ -362,7 +347,7 @@ namespace EasyTravel.Data.Migrations
                     b.Property<int>("CityId")
                         .HasColumnType("int");
 
-                    b.Property<int>("ContactFormId")
+                    b.Property<int?>("ContactFormId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedOn")
@@ -408,6 +393,28 @@ namespace EasyTravel.Data.Migrations
                     b.HasIndex("IsDeleted");
 
                     b.ToTable("Properties");
+                });
+
+            modelBuilder.Entity("EasyTravel.Data.Models.PropertyAmenity", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<int>("AmenityId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PropertyId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AmenityId");
+
+                    b.HasIndex("PropertyId");
+
+                    b.ToTable("PropertyAmenities");
                 });
 
             modelBuilder.Entity("EasyTravel.Data.Models.Rating", b =>
@@ -616,21 +623,6 @@ namespace EasyTravel.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("AmenityProperty", b =>
-                {
-                    b.HasOne("EasyTravel.Data.Models.Amenity", null)
-                        .WithMany()
-                        .HasForeignKey("AmenitiesId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("EasyTravel.Data.Models.Property", null)
-                        .WithMany()
-                        .HasForeignKey("PropertiesId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("EasyTravel.Data.Models.Booking", b =>
                 {
                     b.HasOne("EasyTravel.Data.Models.Property", "Property")
@@ -688,15 +680,32 @@ namespace EasyTravel.Data.Migrations
 
                     b.HasOne("EasyTravel.Data.Models.ContactForm", "ContactForm")
                         .WithMany("Properties")
-                        .HasForeignKey("ContactFormId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .HasForeignKey("ContactFormId");
 
                     b.Navigation("Category");
 
                     b.Navigation("City");
 
                     b.Navigation("ContactForm");
+                });
+
+            modelBuilder.Entity("EasyTravel.Data.Models.PropertyAmenity", b =>
+                {
+                    b.HasOne("EasyTravel.Data.Models.Amenity", "Amenity")
+                        .WithMany("Properties")
+                        .HasForeignKey("AmenityId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("EasyTravel.Data.Models.Property", "Property")
+                        .WithMany("Amenities")
+                        .HasForeignKey("PropertyId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Amenity");
+
+                    b.Navigation("Property");
                 });
 
             modelBuilder.Entity("EasyTravel.Data.Models.Rating", b =>
@@ -784,6 +793,11 @@ namespace EasyTravel.Data.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("EasyTravel.Data.Models.Amenity", b =>
+                {
+                    b.Navigation("Properties");
+                });
+
             modelBuilder.Entity("EasyTravel.Data.Models.ApplicationUser", b =>
                 {
                     b.Navigation("Bookings");
@@ -818,6 +832,8 @@ namespace EasyTravel.Data.Migrations
 
             modelBuilder.Entity("EasyTravel.Data.Models.Property", b =>
                 {
+                    b.Navigation("Amenities");
+
                     b.Navigation("Bookings");
 
                     b.Navigation("Images");

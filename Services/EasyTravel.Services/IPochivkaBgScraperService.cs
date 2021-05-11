@@ -4,6 +4,6 @@
 
     public interface IPochivkaBgScraperService
     {
-        Task PopulateDbWithPropertiesAsync(int recipesCount);
+        Task ImportRecipesAsync(int fromId, int toId);
     }
 }

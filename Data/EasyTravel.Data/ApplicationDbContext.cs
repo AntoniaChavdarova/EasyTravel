@@ -40,6 +40,8 @@
 
         public DbSet<Image> Images { get; set; }
 
+        public DbSet<PropertyAmenity> PropertyAmenities { get; set; }
+
         public DbSet<Rating> Ratings { get; set; }
 
         public DbSet<Review> Reviews { get; set; }
