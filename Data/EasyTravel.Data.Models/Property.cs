@@ -27,9 +27,9 @@
         [MinLength(GlobalConstants.DataValidations.DescriptionMinLength)]
         public string Description { get; set; }
 
-        public decimal SummerPrice { get; set; }
+        public string PriceSummerr { get; set; }
 
-        public decimal WinterPrice { get; set; }
+        public string PriceWinter { get; set; }
 
         public int Capacity { get; set; }
 

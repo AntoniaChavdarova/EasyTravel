@@ -57,14 +57,14 @@ namespace EasyTravel.Services
                 {
                     Name = prop.Name,
                     Description = prop.Description,
-                   // Capacity = prop.Capacity,
+                    Capacity = prop.Capacity,
                     PhoneNumber = prop.PhoneNumber,
                     Address = prop.Address,
                     OriginalUrl = prop.OriginalUrl,
                     CategoryId = categoryId,
                     CityId = cityId,
-                  // SummerPrice = prop.SummerPrice,
-                  // WinterPrice = prop.WinterPrice,
+                    PriceSummerr = prop.SummerPrice,
+                    PriceWinter = prop.WinterPrice,
                 };
                 await this.propertiesRepository.AddAsync(newProperty);
 
@@ -187,12 +187,11 @@ namespace EasyTravel.Services
                     var tablewithInfo = page.QuerySelectorAll("#prices > table > tbody > tr > td").Select(x => x.TextContent)
                         .ToList();
 
-               // var summerPrice = decimal.Parse(tablewithInfo[3]);
-               // var winterPrice = decimal.Parse(tablewithInfo[5]);
+                    
                     var count = int.Parse(tablewithInfo[1]);
-                   // property.SummerPrice = summerPrice;
-                   // property.WinterPrice = winterPrice;
-                   property.Capacity = count;
+                    property.SummerPrice = tablewithInfo[3];
+                    property.WinterPrice = tablewithInfo[5];
+                    property.Capacity = count;
 
                     var imgElements = page.GetElementsByClassName("gallery-slider");
 

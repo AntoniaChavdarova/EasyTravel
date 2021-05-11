@@ -25,9 +25,9 @@ namespace EasyTravel.Services.Models
 
         public string Description { get; set; }
 
-        public decimal SummerPrice { get; set; }
+        public string SummerPrice { get; set; }
 
-        public decimal WinterPrice { get; set; }
+        public string WinterPrice { get; set; }
 
         public int Capacity { get; set; }
 
