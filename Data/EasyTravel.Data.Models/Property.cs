@@ -8,11 +8,10 @@
     using EasyTravel.Common;
     using EasyTravel.Data.Common.Models;
 
-    public class Property : BaseDeletableModel<string>
+    public class Property : BaseDeletableModel<int>
     {
         public Property()
         {
-            this.Id = Guid.NewGuid().ToString();
             this.Amenities = new HashSet<Amenity>();
             this.Bookings = new HashSet<Booking>();
             this.Images = new HashSet<Image>();
@@ -35,9 +34,6 @@
         public int Capacity { get; set; }
 
         public string OriginalUrl { get; set; }
-
-        [DefaultValue(true)]
-        public bool IsAvailable { get; set; }
 
         [Required]
         [MinLength(GlobalConstants.DataValidations.AddressMinLength)]

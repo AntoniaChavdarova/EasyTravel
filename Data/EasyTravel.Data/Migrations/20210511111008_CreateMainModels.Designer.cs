@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EasyTravel.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210510113533_CreateAllModels")]
-    partial class CreateAllModels
+    [Migration("20210511111008_CreateMainModels")]
+    partial class CreateMainModels
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -26,8 +26,8 @@ namespace EasyTravel.Data.Migrations
                     b.Property<int>("AmenitiesId")
                         .HasColumnType("int");
 
-                    b.Property<string>("PropertiesId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("PropertiesId")
+                        .HasColumnType("int");
 
                     b.HasKey("AmenitiesId", "PropertiesId");
 
@@ -203,9 +203,8 @@ namespace EasyTravel.Data.Migrations
                     b.Property<int>("PeopleCount")
                         .HasColumnType("int");
 
-                    b.Property<string>("PropertyId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("PropertyId")
+                        .HasColumnType("int");
 
                     b.Property<string>("UserId")
                         .IsRequired()
@@ -333,23 +332,22 @@ namespace EasyTravel.Data.Migrations
                     b.Property<int>("PropertyId")
                         .HasColumnType("int");
 
-                    b.Property<string>("PropertyId1")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("RemoteImageUrl")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PropertyId1");
+                    b.HasIndex("PropertyId");
 
                     b.ToTable("Images");
                 });
 
             modelBuilder.Entity("EasyTravel.Data.Models.Property", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
 
                     b.Property<string>("Address")
                         .IsRequired()
@@ -376,9 +374,6 @@ namespace EasyTravel.Data.Migrations
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsAvailable")
-                        .HasColumnType("bit");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -431,9 +426,6 @@ namespace EasyTravel.Data.Migrations
                     b.Property<int>("PropertyId")
                         .HasColumnType("int");
 
-                    b.Property<string>("PropertyId1")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
@@ -442,7 +434,7 @@ namespace EasyTravel.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PropertyId1");
+                    b.HasIndex("PropertyId");
 
                     b.HasIndex("UserId");
 
@@ -474,9 +466,6 @@ namespace EasyTravel.Data.Migrations
                     b.Property<int>("PropertyId")
                         .HasColumnType("int");
 
-                    b.Property<string>("PropertyId1")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
@@ -484,7 +473,7 @@ namespace EasyTravel.Data.Migrations
 
                     b.HasIndex("IsDeleted");
 
-                    b.HasIndex("PropertyId1");
+                    b.HasIndex("PropertyId");
 
                     b.HasIndex("UserId");
 
@@ -676,7 +665,9 @@ namespace EasyTravel.Data.Migrations
                 {
                     b.HasOne("EasyTravel.Data.Models.Property", "Property")
                         .WithMany("Images")
-                        .HasForeignKey("PropertyId1");
+                        .HasForeignKey("PropertyId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.Navigation("Property");
                 });
@@ -712,7 +703,9 @@ namespace EasyTravel.Data.Migrations
                 {
                     b.HasOne("EasyTravel.Data.Models.Property", "Property")
                         .WithMany("Ratings")
-                        .HasForeignKey("PropertyId1");
+                        .HasForeignKey("PropertyId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("EasyTravel.Data.Models.ApplicationUser", "User")
                         .WithMany("Ratings")
@@ -727,7 +720,9 @@ namespace EasyTravel.Data.Migrations
                 {
                     b.HasOne("EasyTravel.Data.Models.Property", "Property")
                         .WithMany("Reviews")
-                        .HasForeignKey("PropertyId1");
+                        .HasForeignKey("PropertyId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("EasyTravel.Data.Models.ApplicationUser", "User")
                         .WithMany("Reviews")

@@ -18,8 +18,7 @@
 
         public virtual ApplicationUser User { get; set; }
 
-        [Required]
-        public string PropertyId { get; set; }
+        public int PropertyId { get; set; }
 
         public virtual Property Property { get; set; }
 
