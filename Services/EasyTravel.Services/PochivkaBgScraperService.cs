@@ -13,7 +13,8 @@ namespace EasyTravel.Services
 {
     public class PochivkaBgScraperService : IPochivkaBgScraperService
     {
-        private const string BaseUrl = "https://pochivka.bg/apartamenti-a4";
+       // private const string BaseUrl = "https://pochivka.bg/apartamenti-a4";
+        private const string BaseUrl = "https://pochivka.bg/kashti-a3";
 
         private readonly IBrowsingContext context;
         private readonly IDeletableEntityRepository<Property> propertiesRepository;
@@ -46,7 +47,6 @@ namespace EasyTravel.Services
         {
 
             var concurrentBag = this.ScrapeProperty(fromId, toId);
-           // Console.WriteLine($"Scraped recipes: {concurrentBag.Count}");
 
             foreach (var prop in concurrentBag)
             {
@@ -92,7 +92,7 @@ namespace EasyTravel.Services
                         RemoteImageUrl = i,
                         Property = newProperty,
                     };
-                 await this.imagesRepository.AddAsync(image);
+                    await this.imagesRepository.AddAsync(image);
                 }     
             }
 
@@ -136,13 +136,6 @@ namespace EasyTravel.Services
 
             var elements = document.QuerySelectorAll(".result-item");
             var links = new List<string>();
-           // var links = new ConcurrentBag<string>();
-
-            //Parallel.ForEach(elements, item =>
-            //{
-            //    var link = item.QuerySelector(".thumb > a ").GetAttribute("href");
-            //    links.Add(link);
-            //});
 
             foreach (var item in elements)
             {
@@ -152,9 +145,9 @@ namespace EasyTravel.Services
 
             links.ToList();
 
-           var property1 = new PropertyDto();
+            var property1 = new PropertyDto();
 
-              foreach (var l in links)
+            foreach (var l in links)
                 {
                     var hhh = "https:" + l;
                     var page = this.context
@@ -187,7 +180,6 @@ namespace EasyTravel.Services
                     var tablewithInfo = page.QuerySelectorAll("#prices > table > tbody > tr > td").Select(x => x.TextContent)
                         .ToList();
 
-                    
                     var count = int.Parse(tablewithInfo[1]);
                     property.SummerPrice = tablewithInfo[3];
                     property.WinterPrice = tablewithInfo[5];
