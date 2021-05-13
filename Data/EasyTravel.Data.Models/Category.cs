@@ -13,6 +13,8 @@
 
         public string Name { get; set; }
 
+        public string RemoteImageUrl { get; set; }
+
         public ICollection<Property> Properties { get; set; }
     }
 }

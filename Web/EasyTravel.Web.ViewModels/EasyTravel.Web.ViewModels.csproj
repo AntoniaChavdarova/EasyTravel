@@ -23,4 +23,8 @@
     <ProjectReference Include="..\..\Services\EasyTravel.Services.Mapping\EasyTravel.Services.Mapping.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="NewFolder\" />
+  </ItemGroup>
+
 </Project>

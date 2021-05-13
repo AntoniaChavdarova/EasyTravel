@@ -1,16 +1,27 @@
 ﻿namespace EasyTravel.Web.Controllers
 {
     using System.Diagnostics;
-
+    using EasyTravel.Services.Data;
     using EasyTravel.Web.ViewModels;
-
+    using EasyTravel.Web.ViewModels.Home;
     using Microsoft.AspNetCore.Mvc;
 
     public class HomeController : BaseController
     {
+        private readonly ICategoriesService categoriesService;
+
+        public HomeController(ICategoriesService categoriesService)
+        {
+            this.categoriesService = categoriesService;
+        }
+
         public IActionResult Index()
         {
-            return this.View();
+            var viewModel = new CategoryListViewModel
+            {
+                Categories = this.categoriesService.GetAllCategories<CategoryInListViewModel>(),
+            };
+            return this.View(viewModel);
         }
 
         public IActionResult Privacy()
