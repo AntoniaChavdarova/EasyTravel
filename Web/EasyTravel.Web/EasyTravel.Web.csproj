@@ -36,4 +36,13 @@
     <ProjectReference Include="..\EasyTravel.Web.Infrastructure\EasyTravel.Web.Infrastructure.csproj" />
     <ProjectReference Include="..\EasyTravel.Web.ViewModels\EasyTravel.Web.ViewModels.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="wwwroot\img\SCAN-Travel-1-1030x579.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\img\xxx.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
 </Project>
