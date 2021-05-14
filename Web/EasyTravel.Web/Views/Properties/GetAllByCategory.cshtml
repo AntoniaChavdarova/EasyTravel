@@ -1,0 +1,31 @@
+﻿@using EasyTravel.Common
+@model EasyTravel.Web.ViewModels.AllProperties.PropertiesViewModel
+@{
+    this.ViewData["Title"] = "Properties by category";
+}
+
+    <div class="row">
+@foreach (var prop in this.Model.Properties)
+{
+        <div class="col-md-6">
+            <div class="component">
+                <div class="card">
+                    <div class="card-header">
+                        <img class="card-img" src="@prop.ImageUrl" alt="img">
+                    </div>
+                    <div class="card-body">
+                        <span class="badge badge-success">@prop.CategoryName</span>
+                        <span class="badge badge-success">@prop.CityName</span>
+                        <span class="badge badge-success">@prop.PhoneNumber</span>
+                        <span class="badge badge-success">@prop.PriceSummerr</span>
+                        <h4 class="card-title mt-2">@prop.Name</h4>
+                        <p class="card-text">Owning a dog is great fun and immensely rewarding. But, dogs have complex needs and each dog is unique. </p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="#a" class="btn btn-primary">Read More</a>
+                    </div>
+                </div>
+                </div>
+            </div>
+                }
+        </div>
