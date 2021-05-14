@@ -49,7 +49,11 @@ namespace EasyTravel.Web.ViewModels.AllProperties
                      opt.MapFrom(x =>
                        x.Images.FirstOrDefault().RemoteImageUrl != null ?
                         x.Images.FirstOrDefault().RemoteImageUrl :
-                        "/images/props/" + x.Images.FirstOrDefault().Id + "." + x.Images.FirstOrDefault().Extension));
+                        "/images/props/" + x.Images.FirstOrDefault().Id + "." + x.Images.FirstOrDefault().Extension))
+            .ForMember(x => x.Description, opt =>
+            opt.MapFrom(x =>
+            x.Description.Length > 200 ?
+            x.Description.Substring(14, 200) + "......." : x.Description));
 
         }
 
