@@ -1,15 +1,16 @@
-﻿using AutoMapper;
-using EasyTravel.Common;
-using EasyTravel.Data.Models;
-using EasyTravel.Services.Mapping;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-
-namespace EasyTravel.Web.ViewModels.AllProperties
+﻿namespace EasyTravel.Web.ViewModels.AllProperties
 {
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.Linq;
+    using System.Text;
+
+    using AutoMapper;
+    using EasyTravel.Common;
+    using EasyTravel.Data.Models;
+    using EasyTravel.Services.Mapping;
+
     public class PropertyInListViewModel : IMapFrom<Property>, IHaveCustomMappings
     {
         [Required]
@@ -45,17 +46,10 @@ namespace EasyTravel.Web.ViewModels.AllProperties
         public void CreateMappings(IProfileExpression configuration)
         {
             configuration.CreateMap<Property, PropertyInListViewModel>()
-                //.ForMember(x => x.ImageUrl, opt =>
-                //     opt.MapFrom(x =>
-                //       x.Images.FirstOrDefault().RemoteImageUrl != null ?
-                //        x.Images.FirstOrDefault().RemoteImageUrl :
-                //        "/images/props/" + x.Images.FirstOrDefault().Id + "." + x.Images.FirstOrDefault().Extension))
             .ForMember(x => x.Description, opt =>
             opt.MapFrom(x =>
             x.Description.Length > 200 ?
             x.Description.Substring(14, 200) + "......." : x.Description));
-
         }
-
     }
 }

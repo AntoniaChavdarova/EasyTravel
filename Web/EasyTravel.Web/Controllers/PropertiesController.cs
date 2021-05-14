@@ -1,13 +1,9 @@
-﻿using EasyTravel.Services.Data;
-using EasyTravel.Web.ViewModels.AllProperties;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace EasyTravel.Web.Controllers
+﻿namespace EasyTravel.Web.Controllers
 {
+    using EasyTravel.Services.Data;
+    using EasyTravel.Web.ViewModels.AllProperties;
+    using Microsoft.AspNetCore.Mvc;
+
     public class PropertiesController : BaseController
     {
         private readonly IPropertiesService propertiesService;

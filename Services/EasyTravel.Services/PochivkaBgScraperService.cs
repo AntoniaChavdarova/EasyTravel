@@ -1,30 +1,31 @@
-﻿using AngleSharp;
-using EasyTravel.Data.Common.Repositories;
-using EasyTravel.Data.Models;
-using EasyTravel.Services.Models;
-using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Threading.Tasks;
-
-namespace EasyTravel.Services
+﻿namespace EasyTravel.Services
 {
+    using System;
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Net;
+    using System.Threading.Tasks;
+
+    using AngleSharp;
+    using EasyTravel.Data.Common.Repositories;
+    using EasyTravel.Data.Models;
+    using EasyTravel.Services.Models;
+
     public class PochivkaBgScraperService : IPochivkaBgScraperService
     {
        private const string BaseUrl = "https://pochivka.bg/apartamenti-a4";
-       // private const string BaseUrl = "https://pochivka.bg/kashti-a3";
+        // private const string BaseUrl = "https://pochivka.bg/kashti-a3";
 
-        private readonly IBrowsingContext context;
-        private readonly IDeletableEntityRepository<Property> propertiesRepository;
-        private readonly IDeletableEntityRepository<Category> categoriesRepository;
-        private readonly IDeletableEntityRepository<City> citiesRepository;
-        private readonly IRepository<Amenity> amenitiesRepository;
-        private readonly IRepository<PropertyAmenity> propAmenitiesRepository;
-        private readonly IRepository<Image> imagesRepository;
+       private readonly IBrowsingContext context;
+       private readonly IDeletableEntityRepository<Property> propertiesRepository;
+       private readonly IDeletableEntityRepository<Category> categoriesRepository;
+       private readonly IDeletableEntityRepository<City> citiesRepository;
+       private readonly IRepository<Amenity> amenitiesRepository;
+       private readonly IRepository<PropertyAmenity> propAmenitiesRepository;
+       private readonly IRepository<Image> imagesRepository;
 
-        public PochivkaBgScraperService(
+       public PochivkaBgScraperService(
             IDeletableEntityRepository<Property> propertyRepository,
             IRepository<Amenity> amenitiesRepository,
             IRepository<Image> imagesRepository,
@@ -43,9 +44,8 @@ namespace EasyTravel.Services
             this.context = BrowsingContext.New(config);
         }
 
-        public async Task ImportRecipesAsync(int fromId, int toId)
+       public async Task ImportRecipesAsync(int fromId, int toId)
         {
-
             var concurrentBag = this.ScrapeProperty(fromId, toId);
 
             foreach (var prop in concurrentBag)
@@ -70,7 +70,6 @@ namespace EasyTravel.Services
                 await this.propertiesRepository.AddAsync(newProperty);
 
                 var amenities = prop.Amenities;
- 
                 foreach (var a in amenities)
                 {
                     var amenityId = await this.GetOrCreateAmenitytAsync(a.Trim());
@@ -94,16 +93,14 @@ namespace EasyTravel.Services
                         Property = newProperty,
                     };
                     await this.imagesRepository.AddAsync(image);
-                }     
+                }
             }
 
             await this.propertiesRepository.SaveChangesAsync();
-           
         }
 
-        private ConcurrentBag<PropertyDto> ScrapeProperty(int fromId, int toId)
+       private ConcurrentBag<PropertyDto> ScrapeProperty(int fromId, int toId)
         {
-
             var concurrentBag = new ConcurrentBag<PropertyDto>();
             Parallel.For(fromId, toId + 1, i =>
             {
@@ -120,7 +117,7 @@ namespace EasyTravel.Services
             return concurrentBag;
         }
 
-        private PropertyDto GetProperty(int id)
+       private PropertyDto GetProperty(int id)
         {
             var url = BaseUrl + $"/{id}";
 
@@ -173,7 +170,7 @@ namespace EasyTravel.Services
                     var descriptionPage = page.QuerySelector("div.col-4.margin-0.pull-right > div.description");
                     property.Description = descriptionPage.TextContent.TrimStart();
                     var amenities = page.QuerySelectorAll("div.col-4 > div.extras > ul > li")
-                       .Select(x => x.TextContent) 
+                       .Select(x => x.TextContent)
                       .ToList();
 
                     property.Amenities.AddRange(amenities);
@@ -203,11 +200,11 @@ namespace EasyTravel.Services
 
                     property1 = property;
                 }
+
             return property1;
+       }
 
-        }
-
-        private async Task<int> GetOrCreateCategoryAsync(string categoryName)
+       private async Task<int> GetOrCreateCategoryAsync(string categoryName)
         {
             var category = this.categoriesRepository
                 .AllAsNoTracking()
@@ -229,7 +226,7 @@ namespace EasyTravel.Services
             return category.Id;
         }
 
-        private async Task<int> GetOrCreateCityAsync(string cityName)
+       private async Task<int> GetOrCreateCityAsync(string cityName)
         {
             var city = this.citiesRepository
                 .AllAsNoTracking()
@@ -251,8 +248,8 @@ namespace EasyTravel.Services
             return city.Id;
         }
 
-        private async Task<int> GetOrCreateAmenitytAsync(string name)
-        {
+       private async Task<int> GetOrCreateAmenitytAsync(string name)
+       {
             var amenity = this.amenitiesRepository
                 .AllAsNoTracking()
                 .FirstOrDefault(x => x.Name == name);
@@ -271,6 +268,6 @@ namespace EasyTravel.Services
             await this.amenitiesRepository.SaveChangesAsync();
 
             return amenity.Id;
-        }
+       }
     }
 }

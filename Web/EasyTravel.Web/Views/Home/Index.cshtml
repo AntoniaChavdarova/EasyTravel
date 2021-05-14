@@ -9,8 +9,8 @@
     <div class="header bg-white">
         <div class="container">
             <div class="row">
-                <div class="col-12 col-md-6">
-                    <h1 class="display-4">Make work easier. <br /> Start with this kit.</h1>
+                <div class="col-12 ">
+                    <h1 class="display-4">Welcome to @GlobalConstants.SystemName!</h1>
                     <p class="lead my-4">Design faster with this powerful and free Bootstrap 4 kit. <br /> Focus on the things that matter.</p>
                     <form class="form-subscribe form-inline mb-3">
                         <div class="form-group flex-grow-1">
@@ -20,11 +20,7 @@
                         <button type="submit" class="btn btn-primary btn-lg mt-0 mt-md-3 mt-lg-0">Subscribe</button>
                     </form>
                 </div>
-                <div class="col-12 col-md-6">
-                    <div class="devices pl-md-4 pt-5 pt-md-0">
-                        <img src="https://scan-travel.net/wp-content/uploads/SCAN-Travel-1-1030x579.jpg" alt="Example Navbar 1" class="img-fluid">
-                    </div>
-                </div>
+
             </div>
         </div>
     </div>
@@ -32,7 +28,7 @@
     <div class="jumbotron " style="background: url('https://scan-travel.net/wp-content/uploads/SCAN-Travel-1-1030x579.jpg') no-repeat; background-size: cover">
         <div class="container">
 
-            <h1 class="display-4 text-primary">Welcome to @GlobalConstants.SystemName!</h1>
+            @*<h1 class="display-4 text-primary">Welcome to @GlobalConstants.SystemName!</h1>*@
             <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
 
             <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
@@ -44,55 +40,56 @@
     </div>
 
    
-    <div class="container-fluid">
-        <div class="row">
-
-            @foreach (var category in this.Model.Categories)
-            {
-
-                <div class="card col-md-4">
-
-                    <div class="card-body">
-                        <h5 class="card-title">@category.Name</h5>
-                        <img class="img-fluid" src="@category.RemoteImageUrl" alt="">
-                        <a asp-controller="Properties" asp-action="GetAllByCategory" asp-route-id="@category.Id" class="btn btn-primary">Go to properties</a>
-                    </div>
-                </div>
-            }
-
-        </div>
-    </div>
-    <hr/>
-
-    <div class="features bg-white">
-        <div class="container">
+        <div class="container p-5 ">
             <div class="row">
-                <div class="col-12 col-md-4">
-                    <div class="feature">
-                        <div class="big-icon text-primary"><i class="fas fa-suitcase"></i></div>
-                        <h5 class="text-primary">Explore Bulgaria with EasyTravel</h5>
-                        <p class="lead">The purpose of this app is to help people who want to travel safe during the COVID-19 pandemic.You can book entire apartments or individual houses. The application will make sharing easy, enjoyable, and safe. </p>
+
+                @foreach (var category in this.Model.Categories)
+                {
+
+                    <div class="card col-md-4">
+
+                        <div class="card-body">
+                            <h5 class="card-title">@category.Name</h5>
+                            <img class="img-fluid" src="@category.RemoteImageUrl" alt="">
+                            <a asp-controller="Properties" asp-action="GetAllByCategory" asp-route-id="@category.Id" class="btn btn-outline-dark">Go to properties</a>
+                        </div>
                     </div>
-                </div>
-                <div class="col-12 col-md-4">
-                    <div class="feature">
-                        <div class="big-icon text-secondary"><i class="fas fa-puzzle-piece"></i></div>
-                        <h5 class="text-secondary">Mix & Match</h5>
-                        <p class="lead">Lazy Kit comes with a variety of different components and sections. By fitting them together you can easily create your desired pages.</p>
+                }
+
+            </div>
+        </div>
+      
+        <hr />
+
+        <div class="features bg-white">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 col-md-4">
+                        <div class="feature">
+                            <div class="big-icon text-primary"><i class="fas fa-suitcase"></i></div>
+                            <h5 class="text-primary">Explore Bulgaria with EasyTravel</h5>
+                            <p class="lead">The purpose of this app is to help people who want to travel safe during the COVID-19 pandemic.You can book entire apartments or individual houses. The application will make sharing easy, enjoyable, and safe. </p>
+                        </div>
                     </div>
-                </div>
-                <div class="col-12 col-md-4">
-                    <div class="feature">
-                        <div class="big-icon text-success"><i class="fas fa-palette"></i></div>
-                        <h5 class="text-success">Customise the Kit</h5>
-                        <p class="lead">Want to try different colours, spacing or typography? You can customise the Lazy Kit by modifying its SCSS files. </p>
+                    <div class="col-12 col-md-4">
+                        <div class="feature">
+                            <div class="big-icon text-secondary"><i class="fas fa-puzzle-piece"></i></div>
+                            <h5 class="text-secondary">Mix & Match</h5>
+                            <p class="lead">Lazy Kit comes with a variety of different components and sections. By fitting them together you can easily create your desired pages.</p>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <div class="feature">
+                            <div class="big-icon text-success"><i class="fas fa-palette"></i></div>
+                            <h5 class="text-success">Customise the Kit</h5>
+                            <p class="lead">Want to try different colours, spacing or typography? You can customise the Lazy Kit by modifying its SCSS files. </p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="copyright text-center">
-        <hr />
-        <p class="small">&copy; 2019, made with <span class="text-danger"><i class="fas fa-heart"></i></span> by BootstrapBay</p>
-    </div>
+        <div class="copyright text-center">
+            <hr />
+            <p class="small">&copy; 2019, made with <span class="text-danger"><i class="fas fa-heart"></i></span> by BootstrapBay</p>
+        </div>
