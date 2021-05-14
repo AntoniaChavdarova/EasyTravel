@@ -35,6 +35,8 @@
 
         public string OriginalUrl { get; set; }
 
+        public string MainImageUrl { get; set; }
+
         [Required]
         [MinLength(GlobalConstants.DataValidations.AddressMinLength)]
         public string Address { get; set; }

@@ -33,6 +33,8 @@ namespace EasyTravel.Services.Models
 
         public string OriginalUrl { get; set; }
 
+        public string MainImageUrl { get; set; }
+
         public List<string> Amenities { get; set; }
 
         public List<string> Images { get; set; }

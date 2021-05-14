@@ -40,16 +40,16 @@ namespace EasyTravel.Web.ViewModels.AllProperties
 
         public int CityId { get; set; }
 
-        public string ImageUrl { get; set; }
+        public string MainImageUrl { get; set; }
 
         public void CreateMappings(IProfileExpression configuration)
         {
             configuration.CreateMap<Property, PropertyInListViewModel>()
-                .ForMember(x => x.ImageUrl, opt =>
-                     opt.MapFrom(x =>
-                       x.Images.FirstOrDefault().RemoteImageUrl != null ?
-                        x.Images.FirstOrDefault().RemoteImageUrl :
-                        "/images/props/" + x.Images.FirstOrDefault().Id + "." + x.Images.FirstOrDefault().Extension))
+                //.ForMember(x => x.ImageUrl, opt =>
+                //     opt.MapFrom(x =>
+                //       x.Images.FirstOrDefault().RemoteImageUrl != null ?
+                //        x.Images.FirstOrDefault().RemoteImageUrl :
+                //        "/images/props/" + x.Images.FirstOrDefault().Id + "." + x.Images.FirstOrDefault().Extension))
             .ForMember(x => x.Description, opt =>
             opt.MapFrom(x =>
             x.Description.Length > 200 ?

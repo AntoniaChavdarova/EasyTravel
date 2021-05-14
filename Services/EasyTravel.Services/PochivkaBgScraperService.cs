@@ -13,8 +13,8 @@ namespace EasyTravel.Services
 {
     public class PochivkaBgScraperService : IPochivkaBgScraperService
     {
-       // private const string BaseUrl = "https://pochivka.bg/apartamenti-a4";
-        private const string BaseUrl = "https://pochivka.bg/kashti-a3";
+       private const string BaseUrl = "https://pochivka.bg/apartamenti-a4";
+       // private const string BaseUrl = "https://pochivka.bg/kashti-a3";
 
         private readonly IBrowsingContext context;
         private readonly IDeletableEntityRepository<Property> propertiesRepository;
@@ -61,6 +61,7 @@ namespace EasyTravel.Services
                     PhoneNumber = prop.PhoneNumber,
                     Address = prop.Address,
                     OriginalUrl = prop.OriginalUrl,
+                    MainImageUrl = prop.MainImageUrl,
                     CategoryId = categoryId,
                     CityId = cityId,
                     PriceSummerr = prop.SummerPrice,
@@ -184,6 +185,9 @@ namespace EasyTravel.Services
                     property.SummerPrice = tablewithInfo[3];
                     property.WinterPrice = tablewithInfo[5];
                     property.Capacity = count;
+
+                    var mainImg = page.QuerySelector(".gallery-slider > li > img").GetAttribute("src");
+                    property.MainImageUrl = mainImg;
 
                     var imgElements = page.GetElementsByClassName("gallery-slider");
 
