@@ -26,6 +26,17 @@ namespace EasyTravel.Services.Data
                 .Where(x => x.Category.Id == id)
                 .To<T>().ToList();
         }
+
+        public T GetById<T>(int id)
+        {
+            var recipe = this.propertiesRepository.AllAsNoTracking()
+                .Where(x => x.Id == id)
+                .To<T>()
+                .FirstOrDefault();
+
+            return recipe;
+        }
+
     }
 }
 

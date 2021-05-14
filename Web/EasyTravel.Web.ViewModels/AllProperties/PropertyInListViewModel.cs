@@ -13,6 +13,8 @@
 
     public class PropertyInListViewModel : IMapFrom<Property>, IHaveCustomMappings
     {
+        public int Id { get; set; }
+
         [Required]
         [MinLength(GlobalConstants.DataValidations.NameMinLength)]
         public string Name { get; set; }

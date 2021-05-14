@@ -1,0 +1,93 @@
+﻿@using EasyTravel.Common
+@model EasyTravel.Web.ViewModels.AllProperties.SinglePropertyViewModel
+@{
+    this.ViewData["Title"] = "Property";
+}
+
+
+<h1 class="display-4">@this.Model.Name</h1>
+<ul class="nav nav-success nav-tabs d-flex flex-column flex-md-row text-center">
+    <li class="nav-item">
+        <a class="nav-link active" data-toggle="tab" href="#home">
+            <i class="fas fa-user-friends"></i> @this.Model.Capacity
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#profile">
+            <i class="fas fa-umbrella-beach"></i>@this.Model.PriceSummerr
+        </a>
+    </li>
+</ul>
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="component">
+            <div class="card">
+                <div class="card-header">
+                    <img class="card-img " src="@this.Model.MainImageUrl" alt="img">
+                    <hr />
+                    <!-- Gallery -->
+                    <div class="row">
+                        @foreach (var img in this.Model.Images.Take(6))
+                        {
+
+                        <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
+                            <img src="@img.RemoteImageUrl"
+                                 class="w-100 shadow-1-strong rounded mb-4"
+                                 alt="img" />
+                          
+                        </div>
+                        }
+                    </div>
+                    <!-- Gallery -->
+                </div>
+                <div class="card-body">
+                    <ul class="nav nav-success nav-tabs d-flex flex-column flex-md-row text-center">
+                        <li class="nav-item">
+                            <a class="nav-link active" data-toggle="tab" href="#home">
+                                <i class="fas fa-user-friends"></i> @this.Model.Capacity
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#profile">
+                                <i class="fas fa-shoe-prints"></i>@this.Model.PriceSummerr
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#profile">
+                                <i class="fas fa-map-marked"></i>@this.Model.Address
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link disabled" href="#">
+                                <i class="fas fa-phone"></i> @this.Model.PhoneNumber
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#profile">
+                                <i class="fas fa-socks"></i> @this.Model.PriceSummerr
+                            </a>
+                        </li>
+                    </ul>
+
+                    <h4 class="card-title mt-2">@this.Model.Name</h4>
+                    <p class="card-text">@this.Model.Description</p>
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+  
+</div>
+
+<div class="row col-md-4">
+
+@foreach (var amenity in this.Model.Amenities)
+{
+    <button class="btn btn-outline-primary">
+        @amenity.AmenityName <span class="badge badge-success badge-pill"></span>
+    </button>
+}
+</div>

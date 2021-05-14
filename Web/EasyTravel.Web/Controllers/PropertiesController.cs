@@ -20,7 +20,13 @@
                 Properties = this.propertiesService.GetPropertiesByCategoryName<PropertyInListViewModel>(id),
             };
             return this.View(viewModel);
-           
         }
+
+        public IActionResult ById(int id)
+        {
+            var recipe = this.propertiesService.GetById<SinglePropertyViewModel>(id);
+            return this.View(recipe);
+        }
+
     }
 }
