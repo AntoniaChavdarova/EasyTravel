@@ -9,14 +9,25 @@
 <ul class="nav nav-success nav-tabs d-flex flex-column flex-md-row text-center">
     <li class="nav-item">
         <a class="nav-link active" data-toggle="tab" href="#home">
-            <i class="fas fa-user-friends"></i> @this.Model.Capacity
+            <i class="fas fa-home"></i>  @this.Model.CategoryName
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link active" data-toggle="tab" href="#home">
+            <i class="fas fa-compass"></i> @this.Model.CityName
         </a>
     </li>
     <li class="nav-item">
         <a class="nav-link" data-toggle="tab" href="#profile">
-            <i class="fas fa-umbrella-beach"></i>@this.Model.PriceSummerr
+            <i class="fas fa-umbrella-beach"></i> Summer Price @this.Model.PriceSummerr
         </a>
     </li>
+    <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#profile">
+            <i class="far fa-snowflake"></i> Winter Price @this.Model.PriceWinter
+        </a>
+    </li>
+
 </ul>
 
 <div class="row">
@@ -30,27 +41,27 @@
                     <div class="row">
                         @foreach (var img in this.Model.Images.Take(6))
                         {
-
+                            @if(img.RemoteImageUrl != null)
+                {
                         <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
                             <img src="@img.RemoteImageUrl"
                                  class="w-100 shadow-1-strong rounded mb-4"
                                  alt="img" />
-                          
+
                         </div>
+
+                }
+
                         }
                     </div>
                     <!-- Gallery -->
+
                 </div>
                 <div class="card-body">
                     <ul class="nav nav-success nav-tabs d-flex flex-column flex-md-row text-center">
                         <li class="nav-item">
                             <a class="nav-link active" data-toggle="tab" href="#home">
                                 <i class="fas fa-user-friends"></i> @this.Model.Capacity
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#profile">
-                                <i class="fas fa-shoe-prints"></i>@this.Model.PriceSummerr
                             </a>
                         </li>
                         <li class="nav-item">
@@ -63,11 +74,7 @@
                                 <i class="fas fa-phone"></i> @this.Model.PhoneNumber
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#profile">
-                                <i class="fas fa-socks"></i> @this.Model.PriceSummerr
-                            </a>
-                        </li>
+
                     </ul>
 
                     <h4 class="card-title mt-2">@this.Model.Name</h4>
@@ -79,15 +86,19 @@
             </div>
         </div>
     </div>
-  
+
 </div>
 
 <div class="row col-md-4">
 
-@foreach (var amenity in this.Model.Amenities)
-{
-    <button class="btn btn-outline-primary">
-        @amenity.AmenityName <span class="badge badge-success badge-pill"></span>
-    </button>
-}
+    <ul class="list-group list-group-flush">
+    @foreach (var am in this.Model.Amenities)
+    {
+
+        <li class="list-group-item">@am.AmenityName</li>
+       
+    }
+    </ul>
 </div>
+
+<a href="@this.Model.OriginalUrl" class="btn btn-primary" role="button">Original Url</a>
