@@ -19,6 +19,7 @@
         public IEnumerable<T> GetAllCategories<T>()
         {
             return this.categoriesRepository.AllAsNoTracking()
+                .OrderBy(x => x.Name)
                 .To<T>().ToList();
         }
     }

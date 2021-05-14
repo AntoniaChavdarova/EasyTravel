@@ -14,7 +14,7 @@ namespace EasyTravel.Services.Data
 
         public PropertiesService(
             IDeletableEntityRepository<Category> categoriesRepository,
-           IDeletableEntityRepository<Property> propertiesRepository)
+            IDeletableEntityRepository<Property> propertiesRepository)
         {
             this.categoriesRepository = categoriesRepository;
             this.propertiesRepository = propertiesRepository;
