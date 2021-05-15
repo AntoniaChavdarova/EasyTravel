@@ -8,10 +8,6 @@
 
     public class ContactForm : BaseModel<int>
     {
-        public ContactForm()
-        {
-            this.Properties = new HashSet<Property>();
-        }
 
         [Required]
         public string UserId { get; set; }
@@ -28,6 +24,6 @@
 
         public string Content { get; set; }
 
-        public ICollection<Property> Properties { get; set; }
+       
     }
 }

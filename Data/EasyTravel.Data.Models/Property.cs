@@ -50,11 +50,7 @@
         public int CityId { get; set; }
 
         public virtual City City { get; set; }
-
-        public int? ContactFormId { get; set; }
-
-        public virtual ContactForm ContactForm { get; set; }
-
+    
         public virtual ICollection<Booking> Bookings { get; set; }
 
         public virtual ICollection<Image> Images { get; set; }
