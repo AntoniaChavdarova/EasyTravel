@@ -1,16 +1,14 @@
-﻿using EasyTravel.Data.Common.Repositories;
-using EasyTravel.Data.Models;
-using EasyTravel.Web.ViewModels.ContactForms;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
-
-namespace EasyTravel.Web.Controllers
+﻿namespace EasyTravel.Web.Controllers
 {
+    using System.Security.Claims;
+    using System.Threading.Tasks;
+
+    using EasyTravel.Data.Common.Repositories;
+    using EasyTravel.Data.Models;
+    using EasyTravel.Web.ViewModels.ContactForms;
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Mvc;
+
     public class ContactsController : BaseController
     {
         private readonly IRepository<ContactForm> contactsRepository;
