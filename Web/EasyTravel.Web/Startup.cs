@@ -81,6 +81,7 @@
             services.AddTransient<IPochivkaBgScraperService, PochivkaBgScraperService>();
             services.AddTransient<ICategoriesService, CategoriesService>();
             services.AddTransient<IPropertiesService, PropertiesService>();
+            services.AddTransient<IRatingService, RatingService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
