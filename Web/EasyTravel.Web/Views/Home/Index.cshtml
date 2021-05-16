@@ -6,7 +6,7 @@
 
 <div class="text-center">
 
-    <div class="header bg-white">
+    @*<div class="header bg-white">
         <div class="container">
             <div class="row">
                 <div class="col-12 ">
@@ -23,20 +23,25 @@
 
             </div>
         </div>
-    </div>
+    </div>*@
 
-    <div class="jumbotron " style="background: url('https://scan-travel.net/wp-content/uploads/SCAN-Travel-1-1030x579.jpg') no-repeat; background-size: cover">
+    <div class="jumbotron " style="background: url('https://media-exp1.licdn.com/dms/image/C4D1BAQGGdNo6IlDOCQ/company-background_10000/0/1519801807380?e=2159024400&v=beta&t=VWHuXHsmYAXZB4XQn7H63FLLvHjjMfs6CdxCh3HwcCM') no-repeat center center fixed; background-size: cover; height:max-content; width:max-content">
         <div class="container">
+            <h1 class="display-4 text-light">Welcome to @GlobalConstants.SystemName!</h1>
+            <p class="lead text-light">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
 
-            @*<h1 class="display-4 text-primary">Welcome to @GlobalConstants.SystemName!</h1>*@
-            <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-
-            <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+           
             <p class="lead">
                 <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
             </p>
         </div>
-
+        <form class="form-subscribe form-inline mb-3">
+            <div class="form-group flex-grow-1">
+                <label class="sr-only" for="email4">Email</label>
+                <input type="text" class="form-control form-control-lg flex-grow-1 mr-2" id="email4" placeholder="Your email address...">
+            </div>
+            <button type="submit" class="btn btn-primary btn-lg mt-0 mt-md-3 mt-lg-0">Subscribe</button>
+        </form>
     </div>
 
 
