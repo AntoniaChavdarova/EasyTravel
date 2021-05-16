@@ -37,6 +37,12 @@ namespace EasyTravel.Services.Data
             return recipe;
         }
 
+        public IEnumerable<T> GetTheHighestRaitingProperties<T>()
+        {
+            return this.propertiesRepository.All()
+                .Where(x => x.Ratings.Average(y => y.Value) >= 4.5)
+                .To<T>().ToList();
+        }
     }
 }
 

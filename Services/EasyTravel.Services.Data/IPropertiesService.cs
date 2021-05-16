@@ -7,5 +7,7 @@
         public IEnumerable<T> GetPropertiesByCategoryName<T>(int id);
 
         public T GetById<T>(int id);
+
+        public IEnumerable<T> GetTheHighestRaitingProperties<T>();
     }
 }
