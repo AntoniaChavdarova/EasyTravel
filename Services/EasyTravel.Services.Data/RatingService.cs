@@ -1,13 +1,11 @@
-﻿using EasyTravel.Data.Common.Repositories;
-using EasyTravel.Data.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace EasyTravel.Services.Data
+﻿namespace EasyTravel.Services.Data
 {
+    using System.Linq;
+    using System.Threading.Tasks;
+
+    using EasyTravel.Data.Common.Repositories;
+    using EasyTravel.Data.Models;
+
     public class RatingService : IRatingService
     {
         private readonly IRepository<Rating> ratingsRepository;
@@ -24,7 +22,7 @@ namespace EasyTravel.Services.Data
                 .Average(x => x.Value);
         }
 
-        public async Task SetVoteAsync(int propertyId, string userId, byte value)
+        public async Task SetRaitingAsync(int propertyId, string userId, byte value)
         {
             var rating = this.ratingsRepository.All()
                 .FirstOrDefault(x => x.UserId == userId && x.PropertyId == propertyId);

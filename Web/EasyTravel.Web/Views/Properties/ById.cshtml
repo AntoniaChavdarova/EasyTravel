@@ -20,30 +20,20 @@
     </li>
 
     <li class="nav-item">
-        <a class="nav-link" data-toggle="tab" href="#profile">
+        <a class="nav-link active" data-toggle="tab" href="#profile">
             <i class="fas fa-umbrella-beach"></i> Summer Price @this.Model.PriceSummerr
         </a>
     </li>
-    @*<li class="nav-item">
-        <a class="nav-link" data-toggle="tab" href="#profile">
-            <i class="far fa-snowflake"></i> Winter Price @this.Model.PriceWinter
-        </a>
-    </li>*@
-    @*<li>
-        <span class="fa fa-star checked" data-vote="1"></span>
-        <span class="fa fa-star checked" data-vote="2"></span>
-        <span class="fa fa-star checked" data-vote="3"></span>
-        <span class="fa fa-star" data-vote="4"></span>
-        <span class="fa fa-star" data-vote="5"></span>
-        <span id="averageVoteValue">5</span><span> / 5</span>
-    </li>*@
+ 
+
     <li>
-        <button type="button" class="btn btn-outline-danger btn-icon" data-vote="1"><i class="fas fa-heart"></i></button>
-        <button type="button" class="btn btn-outline-danger btn-icon" data-vote="2"><i class="fas fa-heart"></i></button>
-        <button type="button" class="btn btn-outline-danger btn-icon" data-vote="3"><i class="fas fa-heart"></i></button>
-        <button type="button" class="btn btn-outline-danger btn-icon" data-vote="4"><i class="fas fa-heart"></i></button>
-        <button type="button" class="btn btn-outline-danger btn-icon" data-vote="5"><i class="fas fa-heart"></i></button>
-        <span id="averageVoteValue">5</span><span> / 5</span>
+        <button type="button" class="btn btn-outline-primary btn-icon" data-vote="1"><i class="fas fa-heart"></i></button>
+        <button type="button" class="btn btn-outline-primary btn-icon" data-vote="2"><i class="fas fa-heart"></i></button>
+        <button type="button" class="btn btn-outline-primary btn-icon" data-vote="3"><i class="fas fa-heart"></i></button>
+        <button type="button" class="btn btn-outline-primary btn-icon" data-vote="4"><i class="fas fa-heart"></i></button>
+        <button type="button" class="btn btn-outline-primary btn-icon" data-vote="5"><i class="fas fa-heart"></i></button>
+        <span id="averageVoteValue">@Model.AverageRaiting.ToString("0.0")</span><span> / 5</span>
+
     </li>
 </ul>
 
@@ -82,15 +72,20 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#profile">
+                            <a class="nav-link active" data-toggle="tab" href="#profile">
                                 <i class="fas fa-map-marked"></i>@this.Model.Address
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link disabled" href="#">
+                            <a class="nav-link active" href="#">
                                 <i class="fas fa-phone"></i> @this.Model.PhoneNumber
                             </a>
                         </li>
+                        <li class="nav-item">
+            <a class="nav-link active" data-toggle="tab" href="#profile">
+                <i class="far fa-snowflake"></i> Winter Price @this.Model.PriceWinter
+            </a>
+        </li>
 
                     </ul>
 
@@ -119,3 +114,29 @@
 </div>
 
 <a href="@this.Model.OriginalUrl" class="btn btn-primary" role="button">Original Url</a>
+
+<form method="post" id="antiForgeryForm"></form>
+@section Scripts {
+    <script>
+        $("button[data-vote]").each(function (el) {
+            $(this).click(function () {
+                var value = $(this).attr("data-vote");
+                var propertyId = @Model.Id;
+                var antiForgeryToken = $('#antiForgeryForm input[name=__RequestVerificationToken]').val();
+                var data = { propertyId: propertyId, value: value };
+                $.ajax({
+                    type: "POST",
+                    url: "/api/Raitings",
+                    data: JSON.stringify(data),
+                    headers: {
+                        'X-CSRF-TOKEN': antiForgeryToken
+                    },
+                    success: function (data) {
+                        $('#averageVoteValue').html(data.averageRaiting.toFixed(1));
+                    },
+                    contentType: 'application/json',
+                });
+            })
+        });
+    </script>
+} 

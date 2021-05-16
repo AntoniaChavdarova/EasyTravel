@@ -4,8 +4,8 @@
 
     public interface IRatingService
     {
-        Task SetVoteAsync(int recipeId, string userId, byte value);
+        Task SetRaitingAsync(int propertyId, string userId, byte value);
 
-        double GetAverageVote(int recipeId);
+        double GetAverageVote(int propertyId);
     }
 }
