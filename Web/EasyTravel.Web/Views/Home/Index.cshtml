@@ -2,7 +2,7 @@
 @model EasyTravel.Web.ViewModels.Home.CategoryListViewModel
 @{
     this.ViewData["Title"] = "Home Page";
-    int count = 0;
+    
 }
 
 <div class="text-center">
@@ -26,24 +26,33 @@
             </div>
         </div>*@
 
-    <div class="jumbotron " style="background: url('https://media-exp1.licdn.com/dms/image/C4D1BAQGGdNo6IlDOCQ/company-background_10000/0/1519801807380?e=2159024400&v=beta&t=VWHuXHsmYAXZB4XQn7H63FLLvHjjMfs6CdxCh3HwcCM') no-repeat center center fixed; background-size: cover; height:max-content; width:max-content">
+    <section class="jumbotron " style="background: url('https://media-exp1.licdn.com/dms/image/C4D1BAQGGdNo6IlDOCQ/company-background_10000/0/1519801807380?e=2159024400&v=beta&t=VWHuXHsmYAXZB4XQn7H63FLLvHjjMfs6CdxCh3HwcCM') no-repeat center center fixed; background-size: cover; height:max-content; width:max-content">
         <div class="container">
             <h1 class="display-4 text-light">Welcome to @GlobalConstants.SystemName!</h1>
             <p class="lead text-light">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
 
 
-            <p class="lead">
+            @*<p class="lead">
                 <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
-            </p>
+            </p>*@
         </div>
-        <form class="form-subscribe form-inline mb-3">
-            <div class="form-group flex-grow-1">
-                <label class="sr-only" for="email4">Email</label>
-                <input type="text" class="form-control form-control-lg flex-grow-1 mr-2" id="email4" placeholder="Your email address...">
+        <form asp-action="Search" class="row d-flex justify-content-center">
+            <div class="col-6 pr-0">
+                <input asp-for="CityName"
+                       class="form-control form-control-lg"
+                       id="inputlg"
+                      
+                       placeholder="Search by city..." />
+                <span asp-validation-for="CityName" class="text-danger"></span>
             </div>
-            <button type="submit" class="btn btn-primary btn-lg mt-0 mt-md-3 mt-lg-0">Subscribe</button>
+            <div class="col-2">
+                <input type="submit"
+                       value="Search"
+                       class="btn btn-lg text-white"
+                       style="background-color:#FF5581;border-radius:0">
+            </div>
         </form>
-    </div>
+    </section>
 
 
     <div class="container p-5 ">

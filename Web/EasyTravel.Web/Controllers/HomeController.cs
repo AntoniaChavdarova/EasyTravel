@@ -1,6 +1,7 @@
 ﻿namespace EasyTravel.Web.Controllers
 {
     using System.Diagnostics;
+    using System.Threading.Tasks;
     using EasyTravel.Services.Data;
     using EasyTravel.Web.ViewModels;
     using EasyTravel.Web.ViewModels.AllProperties;
@@ -11,22 +12,53 @@
     {
         private readonly ICategoriesService categoriesService;
         private readonly IPropertiesService propertiesService;
+        private readonly ISearchService searchService;
 
         public HomeController(
             ICategoriesService categoriesService,
-            IPropertiesService propertiesService)
+            IPropertiesService propertiesService,
+            ISearchService searchService)
         {
             this.categoriesService = categoriesService;
             this.propertiesService = propertiesService;
+            this.searchService = searchService;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(InputSeacrhViewModel input)
         {
             var viewModel = new CategoryListViewModel
             {
                 Categories = this.categoriesService.GetAllCategories<CategoryInListViewModel>(),
                 TopRaitings = this.propertiesService.GetTheHighestRaitingProperties<TopRaitingsPropertiesViewModel>(),
             };
+            return this.View(viewModel);
+        }
+
+        public IActionResult Search(string cityName)
+        {
+            var model = new SearchFormModel
+            {
+                CityName = cityName,
+            };
+
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(model);
+            }
+
+
+            return this.RedirectToAction("Results", model);
+        }
+
+        // rezultata
+        [HttpGet]
+        public IActionResult Results(SearchFormModel model)
+        {
+            var viewModel = new SearchViewModel
+            {
+                Results = this.searchService.SearchByCityNameAndCapacity<PropertyInListViewModel>(model.CityName),
+            };
+
             return this.View(viewModel);
         }
 

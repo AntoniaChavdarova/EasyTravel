@@ -1,0 +1,31 @@
+﻿@using EasyTravel.Common
+@model EasyTravel.Web.ViewModels.Home.SearchViewModel
+@{
+    this.ViewData["Title"] = "Properties by city";
+}
+
+<div class="row">
+    @foreach (var prop in this.Model.Results)
+    {
+        <div class="col-md-6">
+            <div class="component">
+                <div class="card">
+                    <div class="card-header">
+                        <img class="card-img" src="@prop.MainImageUrl" alt="img">
+                    </div>
+                    <div class="card-body">
+                        <span class="badge badge-success">@prop.CategoryName</span>
+                        <span class="badge badge-success">@prop.CityName</span>
+                        <span class="badge badge-success">@prop.PhoneNumber</span>
+                        <span class="badge badge-success">@prop.PriceSummerr</span>
+                        <h4 class="card-title mt-2">@prop.Name</h4>
+                        <p class="card-text">@prop.Description</p>
+                    </div>
+                    <div class="card-footer">
+                        <a asp-controller="Properties" asp-action="ById" asp-route-id="@prop.Id" class="btn btn-primary">Read More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
