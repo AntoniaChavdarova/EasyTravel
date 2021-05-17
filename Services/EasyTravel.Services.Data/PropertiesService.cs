@@ -41,6 +41,7 @@ namespace EasyTravel.Services.Data
         {
             return this.propertiesRepository.All()
                 .Where(x => x.Ratings.Average(y => y.Value) >= 4.5)
+                .OrderBy(x => Guid.NewGuid())
                 .To<T>().ToList();
         }
     }

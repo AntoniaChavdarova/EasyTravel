@@ -2,35 +2,36 @@
 @model EasyTravel.Web.ViewModels.Home.CategoryListViewModel
 @{
     this.ViewData["Title"] = "Home Page";
+    int count = 0;
 }
 
 <div class="text-center">
 
     @*<div class="header bg-white">
-        <div class="container">
-            <div class="row">
-                <div class="col-12 ">
-                    <h1 class="display-4">Welcome to @GlobalConstants.SystemName!</h1>
-                    <p class="lead my-4">Design faster with this powerful and free Bootstrap 4 kit. <br /> Focus on the things that matter.</p>
-                    <form class="form-subscribe form-inline mb-3">
-                        <div class="form-group flex-grow-1">
-                            <label class="sr-only" for="email4">Email</label>
-                            <input type="text" class="form-control form-control-lg flex-grow-1 mr-2" id="email4" placeholder="Your email address...">
-                        </div>
-                        <button type="submit" class="btn btn-primary btn-lg mt-0 mt-md-3 mt-lg-0">Subscribe</button>
-                    </form>
-                </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 ">
+                        <h1 class="display-4">Welcome to @GlobalConstants.SystemName!</h1>
+                        <p class="lead my-4">Design faster with this powerful and free Bootstrap 4 kit. <br /> Focus on the things that matter.</p>
+                        <form class="form-subscribe form-inline mb-3">
+                            <div class="form-group flex-grow-1">
+                                <label class="sr-only" for="email4">Email</label>
+                                <input type="text" class="form-control form-control-lg flex-grow-1 mr-2" id="email4" placeholder="Your email address...">
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-lg mt-0 mt-md-3 mt-lg-0">Subscribe</button>
+                        </form>
+                    </div>
 
+                </div>
             </div>
-        </div>
-    </div>*@
+        </div>*@
 
     <div class="jumbotron " style="background: url('https://media-exp1.licdn.com/dms/image/C4D1BAQGGdNo6IlDOCQ/company-background_10000/0/1519801807380?e=2159024400&v=beta&t=VWHuXHsmYAXZB4XQn7H63FLLvHjjMfs6CdxCh3HwcCM') no-repeat center center fixed; background-size: cover; height:max-content; width:max-content">
         <div class="container">
             <h1 class="display-4 text-light">Welcome to @GlobalConstants.SystemName!</h1>
             <p class="lead text-light">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
 
-           
+
             <p class="lead">
                 <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
             </p>
@@ -53,7 +54,7 @@
 
                 <div class="card col-md-4">
 
-                    <div class="card-body">                       
+                    <div class="card-body">
                         <h5 class="card-title">@category.Name</h5>
                         <img class="img-fluid" src="@category.RemoteImageUrl" alt="">
                         <a asp-controller="Properties" asp-action="GetAllByCategory" asp-route-id="@category.Id" class="btn btn-outline-dark">Go to properties</a>
@@ -64,11 +65,12 @@
         </div>
     </div>
     <hr />
-    <h2>Homes guests love</h2>
+    <h2>Homes guests love <i class="fas fa-grin-hearts "></i></h2>
+
     <div class="container p-5 ">
         <div class="row">
 
-            @foreach (var property in this.Model.TopRaitings)
+            @foreach (var property in this.Model.TopRaitings.Take(3))
             {
 
                 <div class="card col-md-4">
@@ -76,15 +78,17 @@
                     <div class="card-body">
                         <h5 class="card-title">@property.Name <span class="badge badge-primary">@property.AverageRaiting</span></h5>
                         <img class="img-fluid" src="@property.MainImageUrl" alt="">
-                        
-                        <a  asp-controller="Properties" asp-action="ById" asp-route-id="@property.Id" class="btn btn-primary" >Go to property</a>
-                     
+
+                        <a asp-controller="Properties" asp-action="ById" asp-route-id="@property.Id" class="btn btn-primary">Go to property</a>
+
                     </div>
                 </div>
             }
 
         </div>
+
     </div>
+
     <hr />
     <div class="features bg-white">
         <div class="container">
