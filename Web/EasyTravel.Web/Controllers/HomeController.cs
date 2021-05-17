@@ -48,15 +48,16 @@
 
 
             return this.RedirectToAction("Results", model);
+            //return this.RedirectToAction(nameof(this.Results), new { model });
         }
 
         // rezultata
         [HttpGet]
         public IActionResult Results(SearchFormModel model)
         {
-            var viewModel = new SearchViewModel
+            var viewModel = new PropertiesViewModel
             {
-                Results = this.searchService.SearchByCityNameAndCapacity<PropertyInListViewModel>(model.CityName),
+                Properties = this.searchService.SearchByCityNameAndCapacity<PropertyInListViewModel>(model.CityName),
             };
 
             return this.View(viewModel);
