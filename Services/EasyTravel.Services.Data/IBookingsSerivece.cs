@@ -1,15 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-
-namespace EasyTravel.Services.Data
+﻿namespace EasyTravel.Services.Data
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+
     public interface IBookingsSerivece
     {
-         IEnumerable<T> MyBookings<T>();
+        IEnumerable<T> MyBookings<T>(string userId);
 
-        Task MakeBookingAsync(int userId, int propertyId, DateTime checkIn, DateTime checkOut);
-
+        Task MakeBookingAsync(string userId, int propertyId, DateTime checkIn, DateTime checkOut);
 
     }
 }

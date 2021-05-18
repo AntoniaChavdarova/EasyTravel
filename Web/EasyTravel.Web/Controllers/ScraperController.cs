@@ -23,7 +23,7 @@ namespace EasyTravel.Web.Controllers
 
         public async Task<IActionResult> Add()
         {
-            await this.pochivkaBgScraperService.ImportRecipesAsync(1, 100);
+            await this.pochivkaBgScraperService.ImportRecipesAsync(1, 300);
 
             return this.RedirectToAction("Index");
         }

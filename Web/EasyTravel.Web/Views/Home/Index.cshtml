@@ -2,7 +2,7 @@
 @model EasyTravel.Web.ViewModels.Home.CategoryListViewModel
 @{
     this.ViewData["Title"] = "Home Page";
-    
+
 }
 
 <div class="text-center">
@@ -33,15 +33,14 @@
 
 
             @*<p class="lead">
-                <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
-            </p>*@
+                    <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+                </p>*@
         </div>
         <form asp-action="Search" class="row d-flex justify-content-center">
             <div class="col-6 pr-0">
                 <input asp-for="CityName"
                        class="form-control form-control-lg"
                        id="inputlg"
-                      
                        placeholder="Search by city..." />
                 <span asp-validation-for="CityName" class="text-danger"></span>
             </div>
@@ -58,19 +57,27 @@
     <div class="container p-5 ">
         <div class="row">
 
-            @foreach (var category in this.Model.Categories)
+            @if (this.Model.Categories.Count() == 0)
+            {
+                <h2>There is no categories</h2>
+            }
+            else
             {
 
-                <div class="card col-md-4">
 
-                    <div class="card-body">
-                        <h5 class="card-title">@category.Name</h5>
-                        <img class="img-fluid" src="@category.RemoteImageUrl" alt="">
-                        <a asp-controller="Properties" asp-action="GetAllByCategory" asp-route-id="@category.Id" class="btn btn-outline-dark">Go to properties</a>
+                @foreach (var category in this.Model.Categories)
+                {
+
+                    <div class="card col-md-4">
+
+                        <div class="card-body">
+                            <h5 class="card-title">@category.Name</h5>
+                            <img class="img-fluid" src="@category.RemoteImageUrl" alt="">
+                            <a asp-controller="Properties" asp-action="GetAllByCategory" asp-route-id="@category.Id" class="btn btn-outline-dark">Go to properties</a>
+                        </div>
                     </div>
-                </div>
+                }
             }
-
         </div>
     </div>
     <hr />

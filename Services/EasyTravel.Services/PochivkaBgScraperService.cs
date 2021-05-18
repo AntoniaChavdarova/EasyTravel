@@ -14,8 +14,8 @@
 
     public class PochivkaBgScraperService : IPochivkaBgScraperService
     {
-       private const string BaseUrl = "https://pochivka.bg/apartamenti-a4";
-        // private const string BaseUrl = "https://pochivka.bg/kashti-a3";
+       //private const string BaseUrl = "https://pochivka.bg/apartamenti-a4";
+         private const string BaseUrl = "https://pochivka.bg/kashti-a3";
 
        private readonly IBrowsingContext context;
        private readonly IDeletableEntityRepository<Property> propertiesRepository;
