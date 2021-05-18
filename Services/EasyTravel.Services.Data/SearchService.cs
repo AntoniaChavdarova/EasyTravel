@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+
     using EasyTravel.Data.Common.Repositories;
     using EasyTravel.Data.Models;
     using EasyTravel.Services.Mapping;
@@ -22,7 +23,7 @@
                 .Where(x => x.City.Name == cityName)
                 .To<T>()
                 .ToList();
-            ;
+
             return cities;
         }
     }

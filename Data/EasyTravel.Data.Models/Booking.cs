@@ -5,7 +5,7 @@
 
     using EasyTravel.Data.Common.Models;
 
-    public class Booking : BaseModel<int>
+    public class Booking : BaseDeletableModel<int>
     {
         public int PeopleCount { get; set; }
 

@@ -1,7 +1,7 @@
 ﻿namespace EasyTravel.Web.Controllers
 {
     using System.Diagnostics;
-    using System.Threading.Tasks;
+
     using EasyTravel.Services.Data;
     using EasyTravel.Web.ViewModels;
     using EasyTravel.Web.ViewModels.AllProperties;
@@ -45,7 +45,6 @@
             {
                 return this.View(model);
             }
-
 
             return this.RedirectToAction("Results", model);
             //return this.RedirectToAction(nameof(this.Results), new { model });
