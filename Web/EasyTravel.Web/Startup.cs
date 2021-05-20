@@ -87,6 +87,9 @@
             services.AddTransient<IPropertiesService, PropertiesService>();
             services.AddTransient<IRatingService, RatingService>();
             services.AddTransient<ISearchService, SearchService>();
+            services.AddTransient<IBookingsSerivece, BookingsService>();
+            services.AddTransient<IDateTimeParserService, DateTimeParserService>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

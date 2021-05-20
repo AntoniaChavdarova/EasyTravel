@@ -7,6 +7,7 @@
     using AutoMapper;
     using EasyTravel.Data.Models;
     using EasyTravel.Services.Mapping;
+    using EasyTravel.Web.ViewModels.Bookings;
 
     public class SinglePropertyViewModel : PropertyBaseViewModel, IMapFrom<Property>, IHaveCustomMappings
     {

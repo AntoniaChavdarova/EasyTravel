@@ -6,6 +6,7 @@
 
 
 
+
 <h1 class="display-4">@this.Model.Name</h1>
 <ul class="nav nav-primary nav-tabs d-flex flex-column flex-md-row text-center">
     <li class="nav-item">
@@ -82,10 +83,10 @@
                             </a>
                         </li>
                         <li class="nav-item">
-            <a class="nav-link active" data-toggle="tab" href="#profile">
-                <i class="far fa-snowflake"></i> Winter Price @this.Model.PriceWinter
-            </a>
-        </li>
+                            <a class="nav-link active" data-toggle="tab" href="#profile">
+                                <i class="far fa-snowflake"></i> Winter Price @this.Model.PriceWinter
+                            </a>
+                        </li>
 
                     </ul>
 
@@ -99,25 +100,37 @@
         </div>
     </div>
 
-</div>
 
-<div class="row col-md-4">
+    <div class="form-btn ">
 
-    <ul class="list-group list-group-flush">
-        @foreach (var am in this.Model.Amenities)
-        {
+        <a asp-controller="Bookings" asp-action="CreateBooking" asp-route-id="@this.Model.Id"  class="btn btn-primary">Read More</a>
+    </div>
+           
+        </div>
 
-            <li class="list-group-item">@am.AmenityName</li>
+        <br />
+        <hr />
 
-        }
-    </ul>
-</div>
+        <div class="col-sm-4">
+            <ul class="list-group list-group-flush">
+                @foreach (var am in this.Model.Amenities)
+                {
 
-<a href="@this.Model.OriginalUrl" class="btn btn-primary" role="button">Original Url</a>
+                    <li class="list-group-item">@am.AmenityName</li>
 
-<form method="post" id="antiForgeryForm"></form>
-@section Scripts {
-    <script>
+                }
+            </ul>
+        </div>
+
+    </div>
+
+
+
+    <a href="@this.Model.OriginalUrl" class="btn btn-primary" role="button">Original Url</a>
+
+    <form method="post" id="antiForgeryForm"></form>
+    @section Scripts {
+        <script>
         $("button[data-vote]").each(function (el) {
             $(this).click(function () {
                 var value = $(this).attr("data-vote");
@@ -138,5 +151,33 @@
                 });
             })
         });
-    </script>
-} 
+        </script>
+    }
+
+    @*<form method="post" id="antiForgeryForm"></form>*@
+    @*@section Scripts {
+        <script>
+        
+            function CheckAvailable() {
+                var dateCheckIn = @this.Model.CheckIn;
+                var dateCheckOut = @this.Model.CheckOut;
+                var result = "<%usernamelbl%>";// here i am getting an error on usernamelbl
+                var jsonText = JSON.stringify({ list: username });
+
+                $.ajax({
+                    url: "/Properties/CheckForAvailibility",
+                    contentType: "application/json; charset=utf-8",
+                    data: jsonText,
+                    success: function (data) {
+                        if (data == username) {
+                            result = "Data is available"
+                        }
+                        else {
+                            result = "Date is not avilable"
+                        }
+                    },
+                    error: function () { alert("its not working"); }
+                });
+            }
+        </script>
+    }*@

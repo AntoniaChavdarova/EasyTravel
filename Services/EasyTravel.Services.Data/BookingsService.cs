@@ -12,9 +12,9 @@
 
     public class BookingsService : IBookingsSerivece
     {
-        private readonly IRepository<Booking> bookingsRepository;
+        private readonly IDeletableEntityRepository<Booking> bookingsRepository;
 
-        public BookingsService(IRepository<Booking> bookingsRepository)
+        public BookingsService(IDeletableEntityRepository<Booking> bookingsRepository)
         {
             this.bookingsRepository = bookingsRepository;
         }
@@ -60,6 +60,15 @@
                 .ToList();
         }
 
+        public bool IsAvailable(int propertyId, DateTime checkIn, DateTime checkOut)
+        {
+            return this.bookingsRepository.All()
+                .Where(x => x.PropertyId == propertyId)
+                .Any(x => x.CheckOut < checkIn);
+
+
+        }
+
         private bool IsDatesAvailable(int propertyId, DateTime checkIn, DateTime checkOut)
         {
             var booking = this.bookingsRepository.AllAsNoTracking()
@@ -76,6 +85,11 @@
         private bool IsDatesValid(DateTime checkIn, DateTime checkOut)
         {
             if (checkIn > checkOut)
+            {
+                return false;
+            }
+
+            if (checkIn < DateTime.UtcNow && checkOut <= DateTime.UtcNow)
             {
                 return false;
             }

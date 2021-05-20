@@ -29,12 +29,20 @@ namespace EasyTravel.Services.Data
 
         public T GetById<T>(int id)
         {
-            var recipe = this.propertiesRepository.AllAsNoTracking()
+            var property = this.propertiesRepository.AllAsNoTracking()
                 .Where(x => x.Id == id)
                 .To<T>()
                 .FirstOrDefault();
 
-            return recipe;
+            return property;
+        }
+
+        public string GetNameByPropertyId(int id)
+        {
+            return this.propertiesRepository.AllAsNoTracking()
+                  .FirstOrDefault(x => x.Id == id)
+                  .Name
+                .ToString();
         }
 
         public IEnumerable<T> GetTheHighestRaitingProperties<T>()

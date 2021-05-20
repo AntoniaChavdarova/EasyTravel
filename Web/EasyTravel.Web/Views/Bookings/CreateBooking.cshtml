@@ -1,0 +1,93 @@
+﻿@using EasyTravel.Common
+@model EasyTravel.Web.ViewModels.Bookings.BookingInputModel
+@{
+    this.ViewData["Title"] = "Property";
+   
+}
+
+<link href="~/css/bookForm.css" rel="stylesheet" />
+
+<div id="booking" class="section">
+    <div class="section-center">
+        <div class="container">
+            <div class="row">
+                <div class="booking-form">
+                    <div class="form-header">
+                        <h1>Make your booking</h1>
+                    </div>
+                  
+                    <form method="post">
+                        <div asp-validation-summary="All" class="text-danger"></div>
+                        <div class="form-group">
+                            <label asp-for="@this.Model.PropName"></label>
+                            <input asp-for="@this.Model.PropName" class="form-control" />
+                            <span asp-validation-for="@this.Model.PropName" class="text-danger"></span>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="@this.Model.CheckIn"></label>
+                                    <input asp-for="@this.Model.CheckIn" class="form-control" type="date" required>
+                                    <span asp-validation-for="@this.Model.CheckIn" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="@this.Model.CheckOut"></label>
+                                    <input asp-for="@this.Model.CheckOut" class="form-control" type="date" required>
+                                    <span asp-validation-for="@this.Model.CheckOut" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <select class="form-control" >
+                                        <option value="" selected hidden>no of rooms</option>
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                    </select> <span class="select-arrow"></span> <span class="form-label">Rooms</span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <select class="form-control" >
+                                        <option value="" selected hidden>no of adults</option>
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                    </select> <span class="select-arrow"></span> <span class="form-label">Adults</span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <select class="form-control" >
+                                        <option value="" selected hidden>no of children</option>
+                                        <option>0</option>
+                                        <option>1</option>
+                                        <option>2</option>
+                                    </select> <span class="select-arrow"></span> <span class="form-label">Children</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group"> 
+                                 <input asp-for="@this.Model.UserEmail" class="form-control" type="email" placeholder="Enter your Email"> <span class="form-label">Email</span> </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input class="form-control" type="tel" placeholder="Enter you Phone">
+                                    <span class="form-label">Phone</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-btn"> <button class="submit-btn">Book Now</button> </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -47,7 +47,6 @@
             }
 
             return this.RedirectToAction("Results", model);
-            //return this.RedirectToAction(nameof(this.Results), new { model });
         }
 
         // rezultata

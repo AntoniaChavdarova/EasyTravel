@@ -2,10 +2,9 @@
 {
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
-    using AutoMapper;
-    using EasyTravel.Common;
-    using EasyTravel.Data.Models;
-    using EasyTravel.Services.Mapping;
+    using EasyTravel.Common;  
+    
+    using EasyTravel.Web.ViewModels.Bookings;
 
     public abstract class PropertyBaseViewModel
     {
@@ -22,7 +21,6 @@
         public string MainImageUrl { get; set; }
 
         public double AverageRaiting { get; set; }
-
-  
+        
     }
 }

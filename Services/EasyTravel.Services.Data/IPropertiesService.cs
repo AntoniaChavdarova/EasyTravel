@@ -9,5 +9,7 @@
         public T GetById<T>(int id);
 
         public IEnumerable<T> GetTheHighestRaitingProperties<T>();
+
+        string GetNameByPropertyId(int id);
     }
 }
