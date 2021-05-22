@@ -25,7 +25,7 @@
             <i class="fas fa-umbrella-beach"></i> Summer Price @this.Model.PriceSummerr
         </a>
     </li>
- 
+
 
     <li>
         <button type="button" class="btn btn-outline-primary btn-icon" data-vote="1"><i class="fas fa-heart"></i></button>
@@ -101,36 +101,44 @@
     </div>
 
 
-    <div class="form-btn ">
+    <div class="col-md-4">
 
-        <a asp-controller="Bookings" asp-action="CreateBooking" asp-route-id="@this.Model.Id"  class="btn btn-primary">Read More</a>
-    </div>
-           
+        <div class="form-btn ">
+
+            <a asp-controller="Bookings" asp-action="CreateBooking" asp-route-id="@this.Model.Id" class="btn btn-primary">Book Now</a>
         </div>
+        <a href="@this.Model.OriginalUrl" class="btn btn-primary" role="button">Original Url</a>
+
 
         <br />
         <hr />
+        <h2>Amenities:</h2>
+        <ul class="list-group list-group-flush">
+            @foreach (var am in this.Model.Amenities)
+            {
+                <span class="badge badge-primary">@am.AmenityName</span>
 
-        <div class="col-sm-4">
-            <ul class="list-group list-group-flush">
-                @foreach (var am in this.Model.Amenities)
-                {
+                @*<li class="list-group-item"></li>*@
 
-                    <li class="list-group-item">@am.AmenityName</li>
-
-                }
-            </ul>
-        </div>
-
+            }
+        </ul>
     </div>
 
+</div>
 
 
-    <a href="@this.Model.OriginalUrl" class="btn btn-primary" role="button">Original Url</a>
 
-    <form method="post" id="antiForgeryForm"></form>
-    @section Scripts {
-        <script>
+<br />
+<hr />
+
+
+
+
+
+
+<form method="post" id="antiForgeryForm"></form>
+@section Scripts {
+    <script>
         $("button[data-vote]").each(function (el) {
             $(this).click(function () {
                 var value = $(this).attr("data-vote");
@@ -151,33 +159,6 @@
                 });
             })
         });
-        </script>
-    }
+    </script>
+}
 
-    @*<form method="post" id="antiForgeryForm"></form>*@
-    @*@section Scripts {
-        <script>
-        
-            function CheckAvailable() {
-                var dateCheckIn = @this.Model.CheckIn;
-                var dateCheckOut = @this.Model.CheckOut;
-                var result = "<%usernamelbl%>";// here i am getting an error on usernamelbl
-                var jsonText = JSON.stringify({ list: username });
-
-                $.ajax({
-                    url: "/Properties/CheckForAvailibility",
-                    contentType: "application/json; charset=utf-8",
-                    data: jsonText,
-                    success: function (data) {
-                        if (data == username) {
-                            result = "Data is available"
-                        }
-                        else {
-                            result = "Date is not avilable"
-                        }
-                    },
-                    error: function () { alert("its not working"); }
-                });
-            }
-        </script>
-    }*@
