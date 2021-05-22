@@ -29,11 +29,26 @@
 
             if (!this.IsDatesAvailable(propertyId, checkIn, checkOut))
             {
-                throw new Exception($"The dates are not available dates");
+                throw new Exception($"The dates are not available ");
+            }
+
+            if (!this.IsDatesBettweenExistingReservation(propertyId, checkIn, checkOut))
+            {
+                throw new Exception($"The dates are not available ");
+            }
+
+            if (!this.IsCheckInBettweenExistingReservation(propertyId, checkIn, checkOut))
+            {
+                throw new Exception($"The dates are not available ");
+            }
+
+            if (!this.IsCheckOutBettweenExistingReservation(propertyId, checkIn, checkOut))
+            {
+                throw new Exception($"The dates are not available ");
             }
 
             var booking = this.bookingsRepository.AllAsNoTracking()
-                .FirstOrDefault(x => x.UserId == userId && x.PropertyId == propertyId);
+                .FirstOrDefault(x => x.UserId == userId && x.PropertyId == propertyId && x.CheckIn == checkIn && x.CheckOut == checkOut);
 
             if (booking == null)
             {
@@ -41,13 +56,12 @@
                 {
                     UserId = userId,
                     PropertyId = propertyId,
+                    CheckIn = checkIn,
+                    CheckOut = checkOut,
                 };
 
                 await this.bookingsRepository.AddAsync(booking);
             }
-
-            booking.CheckIn = checkIn;
-            booking.CheckOut = checkOut;
 
             await this.bookingsRepository.SaveChangesAsync();
         }
@@ -60,11 +74,48 @@
                 .ToList();
         }
 
-        public bool IsAvailable(int propertyId, DateTime checkIn, DateTime checkOut)
+        private bool IsDatesBettweenExistingReservation(int propertyId, DateTime checkIn, DateTime checkOut)
         {
-            return this.bookingsRepository.All()
-                .Where(x => x.PropertyId == propertyId)
-                .Any(x => x.CheckOut < checkIn);
+            var booking = this.bookingsRepository.AllAsNoTracking()
+             .FirstOrDefault(x => x.PropertyId == propertyId && checkIn >= x.CheckIn  && checkOut <= x.CheckOut);
+
+            if (booking == null)
+            {
+                return true;
+            }
+
+            return false;
+
+
+        }
+
+        private bool IsCheckInBettweenExistingReservation(int propertyId, DateTime checkIn, DateTime checkOut)
+        {
+            var booking = this.bookingsRepository.AllAsNoTracking()
+             .FirstOrDefault(x => x.PropertyId == propertyId && checkIn >= x.CheckIn && checkIn < x.CheckOut
+             || checkIn < x.CheckIn && checkOut <= x.CheckOut && checkOut > x.CheckIn);
+
+            if (booking == null)
+            {
+                return true;
+            }
+
+            return false;
+
+
+        }
+
+        private bool IsCheckOutBettweenExistingReservation(int propertyId, DateTime checkIn, DateTime checkOut)
+        {
+            var booking = this.bookingsRepository.AllAsNoTracking()
+             .FirstOrDefault(x => x.PropertyId == propertyId && checkOut > x.CheckIn && checkOut <= x.CheckOut);
+
+            if (booking == null)
+            {
+                return true;
+            }
+
+            return false;
 
 
         }

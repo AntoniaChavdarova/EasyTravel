@@ -10,7 +10,7 @@
 
         Task MakeBookingAsync(string userId, int propertyId, DateTime checkIn, DateTime checkOut);
 
-        bool IsAvailable(int propertyId, DateTime checkIn, DateTime checkOut);
+        
 
     }
 }
