@@ -9,8 +9,7 @@
         IEnumerable<T> MyBookings<T>(string userId);
 
         Task MakeBookingAsync(string userId, int propertyId, DateTime checkIn, DateTime checkOut);
-
-        
+       
 
     }
 }

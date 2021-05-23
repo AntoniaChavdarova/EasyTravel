@@ -93,7 +93,7 @@
         {
             var booking = this.bookingsRepository.AllAsNoTracking()
              .FirstOrDefault(x => x.PropertyId == propertyId && checkIn >= x.CheckIn && checkIn < x.CheckOut
-             || checkIn < x.CheckIn && checkOut <= x.CheckOut && checkOut > x.CheckIn);
+             || x.PropertyId == propertyId && checkIn < x.CheckIn && checkOut <= x.CheckOut && checkOut > x.CheckIn);
 
             if (booking == null)
             {
@@ -116,8 +116,6 @@
             }
 
             return false;
-
-
         }
 
         private bool IsDatesAvailable(int propertyId, DateTime checkIn, DateTime checkOut)

@@ -69,8 +69,19 @@ namespace EasyTravel.Web.Controllers
                 return this.View(viewModel);
             }
 
-            return this.Redirect("/");
+            return this.RedirectToAction(nameof(this.AllBookings));
+        }
+
+        public IActionResult AllBookings()
+        {
+            var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+
+            var viewModel = new BookingsListViewModel
+            {
+                MyBookings = this.bookingsService.MyBookings<BookingViewModel>(userId),
+            };
+
+            return this.View(viewModel);
         }
     }
 }
-

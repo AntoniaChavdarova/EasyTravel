@@ -1,0 +1,129 @@
+﻿@model EasyTravel.Web.ViewModels.Bookings.BookingsListViewModel
+@{
+    this.ViewData["Title"] = "Your Bookings";
+}
+@if (@Model.MyBookings.Count() == 0)
+{
+    <div class="row">
+        <div class="col-lg-4 ml-lg-5">
+            <div class="about_text_2">
+                <p>
+                    Oh, no! Nothing booked yet...
+                </p>
+            </div>
+            <div class="about_text_highlight">
+                Book an appointment in 3 easy steps:
+            </div>
+            <div class="about_text_highlight">
+                <ol>
+                    <li>Choose a city.</li>
+                    <li>Find a property.</li>
+                    <li>Pick date.</li>
+                </ol>
+            </div>
+            <div class="about_text_2">
+                <p>
+                    Waiting you back here. :)
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-4 ml-lg-5">
+            <div class="button button-large button_1 elements_button mt-4">
+                <a asp-area="" asp-controller="Home" asp-action="Index">
+                    <span>Find Property</span>
+                </a>
+            </div>
+        </div>
+    </div>
+}
+
+@if (@Model.MyBookings.Count() > 0)
+{
+    <h2>Upcoming (@Model.MyBookings.Count())</h2>
+
+    <table class="table table-bordered table-striped">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col">Check In</th>
+                <th scope="col">Check Out</th>
+                <th scope="col">Status <span class="text-info">*</span></th>
+                <th scope="col">Hotel/House</th>
+                <th scope="col">Address</th>
+                <th scope="col">User</th>
+                <th scope="col">Cancelation</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var booking in this.Model.MyBookings)
+            {
+                <tr>
+                    <th scope="row">@booking.CheckIn.ToString("dddd, dd MMMM yyyy")</th>
+                    <th scope="row">@booking.CheckOut.ToString("dddd, dd MMMM yyyy")</th>
+                    <td>
+                        @if (booking.Confirmed == true)
+                        {
+                            <span class="badge badge-success">Confirmed</span>
+                        }
+                        else if (booking.Confirmed == false)
+                        {
+                            <span class="badge badge-danger">Declined</span>
+                        }
+                        else
+                        {
+                            <span class="badge badge-secondary">Pending</span>
+                        }
+                    </td>
+                    <td>@booking.PropertyName</td>
+                    <td>@booking.PropertyAddress, @booking.PropertyCityName</td>
+                    <td>@booking.UserEmail</td>
+                    @*<td>
+                        <a class="btn btn-outline-danger btn-sm"
+                           asp-area="" asp-controller="Appointments" asp-action="CancelAppointment" asp-route-id="@appointment.Id">
+                            Cancel
+                        </a>
+                    </td>*@
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div class="row">
+        <div class="col-lg-10 ml-lg-5">
+            <div class="about_text_highlight">
+                <span class="text-info">*</span> Status
+            </div>
+            <div class="about_text_2">
+                <ol>
+                    <li>
+                        <span class="badge badge-secondary">Pending</span>
+                        - Waiting for the Property's reply.
+                    </li>
+                    <li>
+                        <span class="badge badge-success">Confirmed</span>
+                        - Good! Your appointment is confirmed.
+                        They are expecting you on the set date.
+                    </li>
+                    <li>
+                        <span class="badge badge-danger">Declined</span>
+                        - Sorry, the appointment can't happen on the set date.
+                        Check your email for rescheduling options from the Property.
+                    </li>
+                </ol>
+                <ul>
+                    <li>Or you can just <strong>book again.</strong> Remember the steps, right?</li>
+                    <li>Go find a city, choose a property and pick date.</li>
+                    <li>
+                        <div class="button button-large button_1 elements_button mt-4">
+                            <a asp-area="" asp-controller="Home" asp-action="Index">
+                                <span>Find Property</span>
+                               
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+}
