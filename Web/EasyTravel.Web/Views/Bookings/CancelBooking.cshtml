@@ -1,0 +1,46 @@
+﻿@model EasyTravel.Web.ViewModels.Bookings.BookingViewModel
+@{
+    this.ViewData["Title"] = "Cancel Booking";
+}
+
+<h3><strong>Are you sure you want to cancel this appointment?</strong></h3>
+<form class="col-6 mt-5">
+    <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Check In</label>
+        <div class="col-sm-7">
+            <div class="form-control">@Model.CheckIn</div>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Property Name</label>
+        <div class="col-sm-7">
+            <div class="form-control">@Model.PropertyName</div>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Address</label>
+        <div class="col-sm-7">
+            <div class="form-control">@Model.PropertyCityName, @Model.PropertyAddress</div>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-3 col-form-label">People Count</label>
+        <div class="col-sm-7">
+            <div class="form-control">@Model.PeopleCount</div>
+        </div>
+    </div>
+</form>
+
+<div class="col-6 mt-5 ml-5">
+    <div class="row ml-5">
+        <form method="post">
+            <button type="submit" class="btn btn-outline-success"
+                    asp-area="" asp-controller="Bookings" asp-action="DeleteBooking" asp-route-id="@Model.Id">
+                Yes, Cancel it!
+            </button>
+        </form>
+        <div class="ml-5">
+            <a class="btn btn-danger" asp-area="" asp-controller="Bookings" asp-action="AllBookings">No! Go Back</a>
+        </div>
+    </div>
+</div>

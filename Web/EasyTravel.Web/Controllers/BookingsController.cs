@@ -1,16 +1,15 @@
-﻿using EasyTravel.Services;
-using EasyTravel.Services.Data;
-using EasyTravel.Web.ViewModels.Bookings;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
-
-namespace EasyTravel.Web.Controllers
+﻿namespace EasyTravel.Web.Controllers
 {
+    using System;
+    using System.Security.Claims;
+    using System.Threading.Tasks;
+
+    using EasyTravel.Services;
+    using EasyTravel.Services.Data;
+    using EasyTravel.Web.ViewModels.Bookings;
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Mvc;
+
     public class BookingsController : BaseController
     {
         private readonly IBookingsSerivece bookingsService;
@@ -30,7 +29,6 @@ namespace EasyTravel.Web.Controllers
         [Authorize]
         public IActionResult CreateBooking(int id)
         {
-           
             var user = this.User.FindFirst(ClaimTypes.Email).Value;
             var name = this.propertiesService.GetNameByPropertyId(id);
 
@@ -72,16 +70,36 @@ namespace EasyTravel.Web.Controllers
             return this.RedirectToAction(nameof(this.AllBookings));
         }
 
-        public IActionResult AllBookings()
+        public async Task<IActionResult> AllBookings()
         {
             var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
 
             var viewModel = new BookingsListViewModel
             {
-                MyBookings = this.bookingsService.MyBookings<BookingViewModel>(userId),
+                MyBookings = await this.bookingsService.MyBookings<BookingViewModel>(userId),
             };
 
             return this.View(viewModel);
+        }
+
+        public async Task<IActionResult> CancelBooking(int id)
+        {
+            var viewModel = await this.bookingsService.GetByIdAsync<BookingViewModel>(id);
+
+            if (viewModel == null)
+            {
+                return new StatusCodeResult(404);
+            }
+
+            return this.View(viewModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteBooking(int id)
+        {
+            await this.bookingsService.DeleteAsync(id);
+
+            return this.RedirectToAction(nameof(this.AllBookings));
         }
     }
 }

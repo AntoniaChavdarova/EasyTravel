@@ -7,6 +7,8 @@
 
     public class BookingViewModel : IMapFrom<Booking>
     {
+        public int Id { get; set; }
+
         public int PeopleCount { get; set; }
 
         public DateTime CheckIn { get; set; }
@@ -27,5 +29,7 @@
 
         // The Salon can Confirm or Decline an appointment
         public bool? Confirmed { get; set; }
+
+        public bool? IsDeleted { get; set; }
     }
 }

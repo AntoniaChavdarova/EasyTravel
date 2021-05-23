@@ -2,6 +2,7 @@
 @{
     this.ViewData["Title"] = "Your Bookings";
 }
+
 @if (@Model.MyBookings.Count() == 0)
 {
     <div class="row">
@@ -70,6 +71,14 @@
                         {
                             <span class="badge badge-danger">Declined</span>
                         }
+                        else if (booking.CheckOut < @DateTime.Now)
+                        {
+                            <span class="badge badge-danger">Completed</span>
+                        }
+                        else if (booking.IsDeleted == true)
+                        {
+                            <span class="badge badge-danger">Cancelled</span>
+                        }
                         else
                         {
                             <span class="badge badge-secondary">Pending</span>
@@ -78,12 +87,16 @@
                     <td>@booking.PropertyName</td>
                     <td>@booking.PropertyAddress, @booking.PropertyCityName</td>
                     <td>@booking.UserEmail</td>
-                    @*<td>
+                    <td>
+                        @if(booking.IsDeleted == false)
+                    {
+
                         <a class="btn btn-outline-danger btn-sm"
-                           asp-area="" asp-controller="Appointments" asp-action="CancelAppointment" asp-route-id="@appointment.Id">
+                           asp-area="" asp-controller="Bookings" asp-action="CancelBooking" asp-route-id="@booking.Id">
                             Cancel
                         </a>
-                    </td>*@
+                    }
+                    </td>
                 </tr>
             }
         </tbody>

@@ -9,6 +9,7 @@
     using EasyTravel.Data.Common.Repositories;
     using EasyTravel.Data.Models;
     using EasyTravel.Services.Mapping;
+    using Microsoft.EntityFrameworkCore;
 
     public class BookingsService : IBookingsSerivece
     {
@@ -66,12 +67,35 @@
             await this.bookingsRepository.SaveChangesAsync();
         }
 
-        public IEnumerable<T> MyBookings<T>(string userId)
+        public async Task<IEnumerable<T>> MyBookings<T>(string userId)
         {
-            return this.bookingsRepository.AllAsNoTracking()
+            return await this.bookingsRepository.AllWithDeleted()
                 .Where(x => x.UserId == userId)
+                .OrderBy(x => x.CheckIn)
                 .To<T>()
-                .ToList();
+                .ToListAsync();
+        }
+
+        public async Task<T> GetByIdAsync<T>(int id)
+        {
+           return 
+                await this.bookingsRepository
+                .All()
+                .Where(x => x.Id == id)
+                .To<T>().FirstOrDefaultAsync();
+
+        }
+
+        public async Task DeleteAsync(int id)
+        {
+            var booking =
+                await this.bookingsRepository
+                .All()
+                .Where(x => x.Id == id)
+                .FirstOrDefaultAsync();
+
+            this.bookingsRepository.Delete(booking);
+            await this.bookingsRepository.SaveChangesAsync();
         }
 
         private bool IsDatesBettweenExistingReservation(int propertyId, DateTime checkIn, DateTime checkOut)
