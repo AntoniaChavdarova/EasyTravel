@@ -1,13 +1,7 @@
 ﻿namespace EasyTravel.Web.Controllers
 {
-    using System;
-    using System.Security.Claims;
-    using System.Threading.Tasks;
-    using EasyTravel.Services;
     using EasyTravel.Services.Data;
     using EasyTravel.Web.ViewModels.AllProperties;
-    using EasyTravel.Web.ViewModels.Bookings;
-    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
     public class PropertiesController : BaseController
@@ -20,12 +14,23 @@
             this.propertiesService = propertiesService;
         }
 
-        public IActionResult GetAllByCategory(int id)
+        public IActionResult GetAllByCategory(int id, int pageId = 1)
         {
+            if (id <= 0)
+            {
+                return this.NotFound();
+            }
+
+            const int ItemsPerPage = 10;
+
             var viewModel = new PropertiesViewModel
             {
-                Properties = this.propertiesService.GetPropertiesByCategoryName<PropertyInListViewModel>(id),
+                ItemsPerPage = ItemsPerPage,
+                PageNumber = pageId,
+                PropertiesCount = this.propertiesService.GetCount(id),
+                Properties = this.propertiesService.GetPropertiesByCategoryName<PropertyInListViewModel>(id, pageId, ItemsPerPage),
             };
+
             return this.View(viewModel);
         }
 

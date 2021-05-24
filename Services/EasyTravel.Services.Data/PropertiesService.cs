@@ -1,12 +1,13 @@
-﻿using EasyTravel.Data.Common.Repositories;
-using EasyTravel.Data.Models;
-using EasyTravel.Services.Mapping;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace EasyTravel.Services.Data
+﻿namespace EasyTravel.Services.Data
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+
+    using EasyTravel.Data.Common.Repositories;
+    using EasyTravel.Data.Models;
+    using EasyTravel.Services.Mapping;
+
     public class PropertiesService : IPropertiesService
     {
         private readonly IDeletableEntityRepository<Category> categoriesRepository;
@@ -20,10 +21,11 @@ namespace EasyTravel.Services.Data
             this.propertiesRepository = propertiesRepository;
         }
 
-        public IEnumerable<T> GetPropertiesByCategoryName<T>(int id)
+        public IEnumerable<T> GetPropertiesByCategoryName<T>(int id, int page, int itemsPerPage)
         {
             return this.propertiesRepository.AllAsNoTracking()
                 .Where(x => x.Category.Id == id)
+                .Skip((page - 1) * itemsPerPage).Take(itemsPerPage)
                 .To<T>().ToList();
         }
 
@@ -47,11 +49,18 @@ namespace EasyTravel.Services.Data
 
         public IEnumerable<T> GetTheHighestRaitingProperties<T>()
         {
-            return this.propertiesRepository.All()
+            return this.propertiesRepository.AllAsNoTracking()
                 .Where(x => x.Ratings.Average(y => y.Value) >= 4.5)
                 .OrderBy(x => Guid.NewGuid())
                 .To<T>().ToList();
         }
+
+        public int GetCount(int id)
+        {
+            return this.propertiesRepository
+                .AllAsNoTracking()
+                .Where(x => x.Category.Id == id)
+                .Count();
+        }
     }
 }
-

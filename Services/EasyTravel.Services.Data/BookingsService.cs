@@ -3,7 +3,6 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Text;
     using System.Threading.Tasks;
 
     using EasyTravel.Data.Common.Repositories;
@@ -19,7 +18,6 @@
         {
             this.bookingsRepository = bookingsRepository;
         }
-
 
         public async Task MakeBookingAsync(string userId, int propertyId, DateTime checkIn, DateTime checkOut)
         {
@@ -48,7 +46,7 @@
                 throw new Exception($"The dates are not available ");
             }
 
-            var booking = this.bookingsRepository.AllAsNoTracking()
+            var booking = this.bookingsRepository.All()
                 .FirstOrDefault(x => x.UserId == userId && x.PropertyId == propertyId && x.CheckIn == checkIn && x.CheckOut == checkOut);
 
             if (booking == null)
@@ -78,8 +76,9 @@
 
         public async Task<T> GetByIdAsync<T>(int id)
         {
-           return 
-                await this.bookingsRepository
+            return
+
+                 await this.bookingsRepository
                 .All()
                 .Where(x => x.Id == id)
                 .To<T>().FirstOrDefaultAsync();

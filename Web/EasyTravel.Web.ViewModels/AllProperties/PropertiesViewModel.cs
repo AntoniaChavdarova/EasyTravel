@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
 
-    public class PropertiesViewModel
+    public class PropertiesViewModel : PagingViewModel
     {
         public IEnumerable<PropertyInListViewModel> Properties { get; set; }
     }
