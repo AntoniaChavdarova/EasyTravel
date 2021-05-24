@@ -31,7 +31,7 @@
                         <li class="nav-item">
                             <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
-                        @if (this.User.Identity.IsAuthenticated)
+                        @if (this.User.Identity.IsAuthenticated && (!this.User.IsInRole("Administrator")))
                         {
                             <li class="nav-item">
                                 <a class="nav-link text-light" asp-area="" asp-controller="Contacts" asp-action="Contact">Contact Us</a>
@@ -52,8 +52,7 @@
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 
                                     <a class="dropdown-item" asp-area="Administration" asp-controller="ContactForms" asp-action="Index">Messages</a>
-                                    <a class="dropdown-item" href="#">Development</a>
-                                    <a class="dropdown-item" href="#">Marketing</a>
+                                    <a class="dropdown-item" asp-area="Administration" asp-controller="Bookings" asp-action="Index">All Bookings</a>                                 
                                 </div>
                             </li>
                         }
