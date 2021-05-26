@@ -10,9 +10,10 @@ body {
 
     .section .section-center {
         position: absolute;
-        top: 50%;
+        top: 54%;
         left: 0;
         right: 0;
+        
         -webkit-transform: translateY(-50%);
         transform: translateY(-50%)
     }
@@ -26,7 +27,7 @@ body {
     max-width: 642px;
     width: 100%;
     margin: auto;
-    padding: 40px;
+    padding: 30px;
     overflow: hidden;
     background-image: url('https://i.imgur.com/8z1tx3u.jpg');
     background-size: cover;

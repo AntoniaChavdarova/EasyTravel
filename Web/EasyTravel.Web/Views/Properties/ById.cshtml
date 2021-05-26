@@ -4,7 +4,7 @@
     this.ViewData["Title"] = "Property";
 }
 
-
+<link href="~/css/button.css" rel="stylesheet" />
 
 
 <h1 class="display-4">@this.Model.Name</h1>
@@ -103,37 +103,62 @@
 
     <div class="col-md-4">
 
-        <div class="form-btn ">
+        <div class="card p-2">
+            <div class="d-flex p-1 px-4 align-items-center">
+                <span class="square"><i class="fas fa-suitcase"></i></span>
+                <span><i class="fas fa-plane"></i></span>
+            </div>
+            <div class="email mt-1">
+                <span><a asp-controller="Bookings" asp-action="CreateBooking" asp-route-id="@this.Model.Id">Book Now</a></span>
+                <div class="dummytext mt-1"> <span>Make your reservation with 1 step</span> </div>
+            </div>
+            <div class="d-flex flex row align-items-center mr-2 mt-2">
+                <div class="icons"> <i class="fa fa-check-circle"></i> <span>Pick dates for check-in and check out</span> </div>
+                <div class="icons"> <i class="fa fa-check-circle"></i> <span>Tell us how many people are coming with you</span> </div>
+                <div class="icons"> <i class="fa fa-check-circle"></i> <span>Give a phone number</span> </div>
 
-            <a asp-controller="Bookings" asp-action="CreateBooking" asp-route-id="@this.Model.Id" class="btn btn-primary">Book Now</a>
+            </div>
         </div>
-        <a href="@this.Model.OriginalUrl" class="btn btn-primary" role="button">Original Url</a>
+
+        <br />
+        <div class="card p-2">
+            <div class="d-flex p-1 px-4 align-items-center"> <span class="square3"><img src="https://i.imgur.com/eSSe3Js.png" height="20" width="20" /></span> </div>
+            <div class="email mt-1">
+                <span>See the original article</span>
+                <div class="dummytext mt-1"> <span>Информацията за всички обяви е взета от Pochivka.bg</span> </div>
+            </div>
+            <div class="d-flex flex row align-items-center mr-2 mt-2">
+                <div class="icons"> <i class="fa fa-check-circle"></i> <span>Приложението е направено с учебни цели</span> </div>
+                <div class="icons">
+                    <i class="fa fa-check-circle"></i> <span>
+                        <a href="@this.Model.OriginalUrl">Original url</a>
+                    </span>
+                </div>
+
+            </div>
+        </div>
 
 
         <br />
         <hr />
-        <h2>Amenities:</h2>
-        <ul class="list-group list-group-flush">
-            @foreach (var am in this.Model.Amenities)
-            {
-                <span class="badge badge-primary">@am.AmenityName</span>
 
-                @*<li class="list-group-item"></li>*@
+        <div class="heading mt-2"> <span>Amenities</span></div>
+        <div class="card p-2">
+        
+            <div class="d-flex flex row align-items-center mr-2 mt-2">
+                @foreach (var am in this.Model.Amenities)
+                {
 
-            }
-        </ul>
+                    <div class="icons4"> <i class="fa fa-check-circle"></i> <span>@am.AmenityName</span> </div>
+
+                }
+
+
+            </div>
+        </div>
     </div>
 
 </div>
-
-
-
-<br />
-<hr />
-
-
-
-
 
 
 <form method="post" id="antiForgeryForm"></form>

@@ -19,7 +19,7 @@
             this.bookingsRepository = bookingsRepository;
         }
 
-        public async Task MakeBookingAsync(string userId, int propertyId, DateTime checkIn, DateTime checkOut)
+        public async Task MakeBookingAsync(string userId, int propertyId, DateTime checkIn, DateTime checkOut , int count)
         {
             if (!this.IsDatesValid(checkIn, checkOut))
             {
@@ -57,6 +57,7 @@
                     PropertyId = propertyId,
                     CheckIn = checkIn,
                     CheckOut = checkOut,
+                    PeopleCount = count,
                 };
 
                 await this.bookingsRepository.AddAsync(booking);

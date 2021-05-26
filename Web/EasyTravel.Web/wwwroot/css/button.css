@@ -1,0 +1,98 @@
+﻿
+.card {
+    border: none;
+    border-radius: 20px;
+    transition: all 0.5s;
+    cursor: pointer
+}
+
+    .card:hover {
+        transform: scale(1.1)
+    }
+
+.heading {
+    font-size: 32px;
+    font-weight: bold;
+    text-align: center
+}
+
+.name {
+    font-size: 15px;
+    font-weight: bold
+}
+
+.square {
+    background-color: #fedcdd;
+    height: 30px;
+    width: 30px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center
+}
+
+.email {
+    font-size: 14px;
+    margin-left: 25px;
+    font-weight: bold
+}
+
+.dummytext {
+    font-size: 12px;
+    font-weight: normal;
+    color: #848590
+}
+
+.dummytext1 {
+    font-size: 50px;
+    font-weight: normal;
+    color: #848590
+}
+
+.icons i {
+    color: #572d5c;
+    margin-left: 25px
+}
+
+.icons span {
+    font-size: 13px;
+    font-weight: normal;
+    color: #848590
+}
+
+.square1 {
+    background-color: #cfe3fe;
+    height: 30px;
+    width: 30px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center
+}
+
+
+
+.square4 {
+    background-color: #eae6fd;
+    height: 200px;
+    width: 100px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center
+}
+
+.icons4 i {
+    color: #572d5c;
+    margin-left: 25px
+}
+
+.icons4 span {
+    font-size: 16px;
+    font-weight: normal;
+    color: #848590
+}
+
+
+
+

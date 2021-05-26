@@ -36,7 +36,7 @@
             {
                 PropertyId = id,
                 UserEmail = user,
-                PropName = name,
+                PropertyName = name,
             };
 
             return this.View(viewModel);
@@ -59,7 +59,7 @@
 
             try
             {
-                await this.bookingsService.MakeBookingAsync(userId, id, dateCheckIn, dateCheckOut);
+                await this.bookingsService.MakeBookingAsync(userId, id, dateCheckIn, dateCheckOut, viewModel.PeopleCount);
             }
             catch (Exception ex)
             {

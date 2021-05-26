@@ -8,7 +8,7 @@
     public class BookingViewModel : IMapFrom<Booking>
     {
         public int Id { get; set; }
-
+        
         public int PeopleCount { get; set; }
 
         public DateTime CheckIn { get; set; }

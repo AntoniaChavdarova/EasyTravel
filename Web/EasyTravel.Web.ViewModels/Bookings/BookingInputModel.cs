@@ -21,8 +21,9 @@
 
         public int PropertyId { get; set; }
 
-        public string PropName { get; set; }
+        public string PropertyName { get; set; }
 
+        [Range(1, 30)]
         public int PeopleCount { get; set; }
 
         public string UserId { get; set; }
