@@ -21,6 +21,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Data\EasyTravel.Data.Common\EasyTravel.Data.Common.csproj" />
     <ProjectReference Include="..\..\Data\EasyTravel.Data.Models\EasyTravel.Data.Models.csproj" />
+    <ProjectReference Include="..\..\Web\EasyTravel.Web.ViewModels\EasyTravel.Web.ViewModels.csproj" />
     <ProjectReference Include="..\EasyTravel.Services.Mapping\EasyTravel.Services.Mapping.csproj" />
   </ItemGroup>
 

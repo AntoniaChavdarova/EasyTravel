@@ -88,14 +88,14 @@
                     <td>@booking.PropertyAddress, @booking.PropertyCityName</td>
                     <td>@booking.UserEmail</td>
                     <td>
-                        @if(booking.IsDeleted == false)
-                    {
+                        @if (booking.IsDeleted == false)
+                        {
 
-                        <a class="btn btn-outline-danger btn-sm"
-                           asp-area="" asp-controller="Bookings" asp-action="CancelBooking" asp-route-id="@booking.Id">
-                            Cancel
-                        </a>
-                    }
+                            <a class="btn btn-outline-danger btn-sm"
+                               asp-area="" asp-controller="Bookings" asp-action="CancelBooking" asp-route-id="@booking.Id">
+                                Cancel
+                            </a>
+                        }
                     </td>
                 </tr>
             }
@@ -120,21 +120,24 @@
                     </li>
                     <li>
                         <span class="badge badge-danger">Declined</span>
-                        - Sorry, the appointment can't happen on the set date.
-                        Check your email for rescheduling options from the Property.
+                        - Sorry, the appointment can't happen on the set date.                       
+                    </li>
+                    <li>
+                        <span class="badge badge-danger">Cancelled</span>
+                        - You have cancelled your reservation.
                     </li>
                 </ol>
+                <hr />
                 <ul>
                     <li>Or you can just <strong>book again.</strong> Remember the steps, right?</li>
                     <li>Go find a city, choose a property and pick date.</li>
-                    <li>
-                        <div class="button button-large button_1 elements_button mt-4">
-                            <a asp-area="" asp-controller="Home" asp-action="Index">
-                                <span>Find Property</span>
-                               
-                            </a>
-                        </div>
-                    </li>
+
+                    <div class="button button-large button_1 elements_button mt-4">
+                        <a asp-area="" asp-controller="Home" asp-action="Index" class="btn btn-outline-primary">
+                            Find Property
+                        </a>
+                    </div>
+
                 </ul>
             </div>
         </div>

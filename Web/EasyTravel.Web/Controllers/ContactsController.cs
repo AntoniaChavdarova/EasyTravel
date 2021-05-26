@@ -1,21 +1,23 @@
 ﻿namespace EasyTravel.Web.Controllers
 {
+    using System;
     using System.Security.Claims;
     using System.Threading.Tasks;
 
     using EasyTravel.Data.Common.Repositories;
     using EasyTravel.Data.Models;
+    using EasyTravel.Services.Data;
     using EasyTravel.Web.ViewModels.ContactForms;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
     public class ContactsController : BaseController
     {
-        private readonly IRepository<ContactForm> contactsRepository;
+        private readonly IContactFormService contactFormService;
 
-        public ContactsController(IRepository<ContactForm> contactsRepository)
+        public ContactsController(IContactFormService contactFormService)
         {
-            this.contactsRepository = contactsRepository;
+            this.contactFormService = contactFormService;
         }
 
         [Authorize]
@@ -35,18 +37,15 @@
 
             var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
 
-            var contactFormEntry = new ContactForm
+            try
             {
-                UserId = userId,
-                FullName = model.FullName,
-                Email = model.Email,
-                Title = model.Title,
-                Content = model.Content,
-
-            };
-
-            await this.contactsRepository.AddAsync(contactFormEntry);
-            await this.contactsRepository.SaveChangesAsync();
+                await this.contactFormService.MakeContactFormAsync(model, userId);
+            }
+            catch (Exception ex)
+            {
+                this.ModelState.AddModelError(string.Empty, ex.Message);
+                return this.View(model);
+            }
 
             return this.RedirectToAction("ThankYou");
         }
