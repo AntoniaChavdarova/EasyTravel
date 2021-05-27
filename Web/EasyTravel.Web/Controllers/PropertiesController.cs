@@ -36,8 +36,14 @@
 
         public IActionResult ById(int id)
         {
-            var recipe = this.propertiesService.GetById<SinglePropertyViewModel>(id);
-            return this.View(recipe);
+            var property = this.propertiesService.GetById<SinglePropertyViewModel>(id);
+
+            if (property == null)
+            {
+                return this.NotFound();
+            }
+
+            return this.View(property);
         }
 
     }

@@ -54,6 +54,7 @@
                 <th scope="col">Address</th>
                 <th scope="col">User</th>
                 <th scope="col">Cancelation</th>
+                <th scope="col">Add review</th>
             </tr>
         </thead>
         <tbody>
@@ -63,10 +64,12 @@
                     <th scope="row">@booking.CheckIn.ToString("dddd, dd MMMM yyyy")</th>
                     <th scope="row">@booking.CheckOut.ToString("dddd, dd MMMM yyyy")</th>
                     <td>
+
                         @if (booking.Confirmed == true)
                         {
                             <span class="badge badge-success">Confirmed</span>
                         }
+
                         else if (booking.Confirmed == false)
                         {
                             <span class="badge badge-danger">Declined</span>
@@ -83,6 +86,11 @@
                         {
                             <span class="badge badge-secondary">Pending</span>
                         }
+
+                        @if (booking.Confirmed == true && booking.CheckOut < DateTime.Now)
+                        {
+                        <span class="badge badge-success">Completed</span>
+                        }
                     </td>
                     <td>@booking.PropertyName</td>
                     <td>@booking.PropertyAddress, @booking.PropertyCityName</td>
@@ -94,6 +102,15 @@
                             <a class="btn btn-outline-danger btn-sm"
                                asp-area="" asp-controller="Bookings" asp-action="CancelBooking" asp-route-id="@booking.Id">
                                 Cancel
+                            </a>
+                        }
+                    </td>
+                    <td>
+                        @if (booking.Confirmed == true && booking.CheckOut < DateTime.Now)
+                        {
+                            <a class="btn btn-outline-success btn-sm"
+                               asp-area="" asp-controller="Reviews" asp-action="CreateReview" asp-route-id="@booking.PropertyId">
+                                Add review
                             </a>
                         }
                     </td>
@@ -117,6 +134,10 @@
                         <span class="badge badge-success">Confirmed</span>
                         - Good! Your appointment is confirmed.
                         They are expecting you on the set date.
+                    </li>
+                    <li>
+                        <span class="badge badge-success">Completed</span>
+                        -Your booking has been copleted . Tell us more about your experience by adding a review
                     </li>
                     <li>
                         <span class="badge badge-danger">Declined</span>

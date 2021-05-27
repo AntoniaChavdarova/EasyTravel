@@ -90,6 +90,7 @@
             services.AddTransient<IBookingsSerivece, BookingsService>();
             services.AddTransient<IDateTimeParserService, DateTimeParserService>();
             services.AddTransient<IContactFormService, ContactFormService>();
+            services.AddTransient<IReviewsService, ReviewService>();
 
         }
 
