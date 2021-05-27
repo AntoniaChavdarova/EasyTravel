@@ -13,13 +13,17 @@
     public class BookingsService : IBookingsSerivece
     {
         private readonly IDeletableEntityRepository<Booking> bookingsRepository;
+        private readonly IDeletableEntityRepository<Property> propertiesRepository;
 
-        public BookingsService(IDeletableEntityRepository<Booking> bookingsRepository)
+        public BookingsService(
+            IDeletableEntityRepository<Booking> bookingsRepository,
+            IDeletableEntityRepository<Property> propertiesRepository)
         {
             this.bookingsRepository = bookingsRepository;
+            this.propertiesRepository = propertiesRepository;
         }
 
-        public async Task MakeBookingAsync(string userId, int propertyId, DateTime checkIn, DateTime checkOut , int count)
+        public async Task MakeBookingAsync(string userId, int propertyId, DateTime checkIn, DateTime checkOut, int guestsCount)
         {
             if (!this.IsDatesValid(checkIn, checkOut))
             {
@@ -46,6 +50,11 @@
                 throw new Exception($"The dates are not available ");
             }
 
+            if (this.ProperyMaxGuestCount(propertyId) < guestsCount)
+            {
+                throw new Exception($"The Capacity of the property it is not enough");
+            }
+
             var booking = this.bookingsRepository.All()
                 .FirstOrDefault(x => x.UserId == userId && x.PropertyId == propertyId && x.CheckIn == checkIn && x.CheckOut == checkOut);
 
@@ -57,7 +66,7 @@
                     PropertyId = propertyId,
                     CheckIn = checkIn,
                     CheckOut = checkOut,
-                    PeopleCount = count,
+                    PeopleCount = guestsCount,
                 };
 
                 await this.bookingsRepository.AddAsync(booking);
@@ -168,6 +177,16 @@
             }
 
             return true;
+        }
+
+        private int ProperyMaxGuestCount(int propertyId)
+        {
+            var maxGuestCount = this.propertiesRepository
+                .All()
+                .FirstOrDefault(x => x.Id == propertyId)
+                .Capacity;
+
+            return maxGuestCount;
         }
     }
 }

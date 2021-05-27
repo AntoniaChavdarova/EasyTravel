@@ -24,6 +24,7 @@
         public string PropertyName { get; set; }
 
         [Range(1, 30)]
+        [Display(Name = "Guests count")]
         public int PeopleCount { get; set; }
 
         public string UserId { get; set; }

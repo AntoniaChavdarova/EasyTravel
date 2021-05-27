@@ -70,6 +70,7 @@
             return this.RedirectToAction(nameof(this.AllBookings));
         }
 
+        [Authorize]
         public async Task<IActionResult> AllBookings()
         {
             var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
@@ -82,6 +83,7 @@
             return this.View(viewModel);
         }
 
+        [Authorize]
         public async Task<IActionResult> CancelBooking(int id)
         {
             var viewModel = await this.bookingsService.GetByIdAsync<BookingViewModel>(id);
@@ -95,6 +97,7 @@
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> DeleteBooking(int id)
         {
             await this.bookingsService.DeleteAsync(id);
