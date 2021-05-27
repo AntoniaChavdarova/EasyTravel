@@ -159,6 +159,10 @@
 
         <hr />
 
+        @*@foreach (var review in this.Model.Reviews)
+        {
+            <h2>@review.Content</h2>
+        }*@
         <div class="card">
             <div class="block-text rel zmin">
                 <a title="" href="#">Hercules</a>

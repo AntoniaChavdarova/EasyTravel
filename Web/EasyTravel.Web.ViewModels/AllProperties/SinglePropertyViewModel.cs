@@ -7,7 +7,7 @@
     using AutoMapper;
     using EasyTravel.Data.Models;
     using EasyTravel.Services.Mapping;
-    using EasyTravel.Web.ViewModels.Bookings;
+    using EasyTravel.Web.ViewModels.Reviews;
 
     public class SinglePropertyViewModel : PropertyBaseViewModel, IMapFrom<Property>, IHaveCustomMappings
     {
@@ -27,6 +27,8 @@
         public string CategoryName { get; set; }     
 
         public string CityName { get; set; }
+
+        public IEnumerable<ReviewViewModel> Reviews { get; set; }
 
         public IEnumerable<AmenitiessViewModel> Amenities { get; set; }
 
