@@ -173,7 +173,9 @@
                             @review.Content
 
                         </p>
-                        <date class="text-muted small"> @review.CreatedOn.ToString("MMM d, yyyy")</date>
+                        <div class="text-muted small"> 
+                            <time datetime="@review.CreatedOn.ToString("O")"></time>
+                        </div>
                         <br>
                         <ins class="ab zmin sprite sprite-i-triangle block"></ins>
 
