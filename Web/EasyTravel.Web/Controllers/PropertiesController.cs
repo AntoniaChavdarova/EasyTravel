@@ -2,6 +2,7 @@
 {
     using EasyTravel.Services.Data;
     using EasyTravel.Web.ViewModels.AllProperties;
+    using EasyTravel.Web.ViewModels.Reviews;
     using Microsoft.AspNetCore.Mvc;
 
     public class PropertiesController : BaseController
@@ -36,6 +37,7 @@
 
         public IActionResult ById(int id)
         {
+
             var property = this.propertiesService.GetById<SinglePropertyViewModel>(id);
 
             if (property == null)

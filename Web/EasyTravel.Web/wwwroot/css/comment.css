@@ -11,7 +11,7 @@
     color: #626262;
     font-size: 14px;
     margin-top: 27px;
-    padding: 15px 18px;
+    padding: 10px 15px;
 }
 
     .block-text a {
@@ -65,25 +65,31 @@
 }
 
 .person-text {
-    padding: 10px 0 0;
+    padding: 3px 0 0;
     text-align: center;
     z-index: 2;
 }
 
-    .person-text a {
-        color: #ffcc00;
-        display: block;
-        font-size: 14px;
-        margin-top: 3px;
-        text-decoration: underline;
+#profilePicture {
+    border-radius: 50%;
+    float: right ;
+    margin: 45px;
+}
+
+    .person-text span {
+        
+        display: flex;
+        font-size: 24px;
+        margin-top: 20px;
+        
     }
 
     .person-text i {
-        color: #fff;
-        font-family: Georgia;
+        color: #fff;       
         font-size: 13px;
     }
 
 .rel {
     position: relative;
+ 
 }

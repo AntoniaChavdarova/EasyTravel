@@ -3,7 +3,7 @@ namespace EasyTravel.Data.Models
 {
     using System;
     using System.Collections.Generic;
-
+    using System.Threading.Tasks;
     using EasyTravel.Data.Common.Models;
 
     using Microsoft.AspNetCore.Identity;
@@ -51,5 +51,10 @@ namespace EasyTravel.Data.Models
         public virtual ICollection<Rating> Ratings { get; set; }
 
         public virtual ICollection<ContactForm> ContactForms { get; set; }
+
+        public static implicit operator ApplicationUser(Task<ApplicationUser> v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
