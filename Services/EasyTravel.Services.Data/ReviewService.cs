@@ -4,7 +4,7 @@
 
     using EasyTravel.Data.Common.Repositories;
     using EasyTravel.Data.Models;
-   
+
     public class ReviewService : IReviewsService
     {
         private readonly IDeletableEntityRepository<Review> reviewsRepository;

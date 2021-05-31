@@ -3,11 +3,12 @@
     using System;
     using System.Security.Claims;
     using System.Threading.Tasks;
-
+    using EasyTravel.Data.Models;
     using EasyTravel.Services;
     using EasyTravel.Services.Data;
     using EasyTravel.Web.ViewModels.Bookings;
     using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
 
     public class BookingsController : BaseController
@@ -15,15 +16,18 @@
         private readonly IBookingsSerivece bookingsService;
         private readonly IDateTimeParserService dateTimeParser;
         private readonly IPropertiesService propertiesService;
+        private readonly UserManager<ApplicationUser> userManager;
 
         public BookingsController(
             IBookingsSerivece bookingsService,
             IDateTimeParserService dateTimeParser,
-            IPropertiesService propertiesService)
+            IPropertiesService propertiesService,
+            UserManager<ApplicationUser> userManager)
         {
             this.bookingsService = bookingsService;
             this.dateTimeParser = dateTimeParser;
             this.propertiesService = propertiesService;
+            this.userManager = userManager;
         }
 
         [Authorize]
@@ -47,7 +51,7 @@
         [HttpPost]
         public async Task<IActionResult> CreateBooking(BookingInputModel viewModel, int id)
         {
-            var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var userId = this.userManager.GetUserId(this.User);
 
             if (!this.ModelState.IsValid)
             {

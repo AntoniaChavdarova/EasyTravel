@@ -22,6 +22,12 @@ namespace EasyTravel.Data.Models
             this.ContactForms = new HashSet<ContactForm>();
         }
 
+        public string FirstName { get; set; }
+
+        public string LastName { get; set; }
+
+        public byte[] ProfilePicture { get; set; }
+
         // Audit info
         public DateTime CreatedOn { get; set; }
 

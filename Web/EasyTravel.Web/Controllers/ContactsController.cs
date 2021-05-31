@@ -9,15 +9,20 @@
     using EasyTravel.Services.Data;
     using EasyTravel.Web.ViewModels.ContactForms;
     using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
 
     public class ContactsController : BaseController
     {
         private readonly IContactFormService contactFormService;
+        private readonly UserManager<ApplicationUser> userManager;
 
-        public ContactsController(IContactFormService contactFormService)
+        public ContactsController(
+            IContactFormService contactFormService,
+            UserManager<ApplicationUser> userManage)
         {
             this.contactFormService = contactFormService;
+            this.userManager = userManage;
         }
 
         [Authorize]
@@ -35,7 +40,7 @@
                 return this.View(model);
             }
 
-            var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var userId = this.userManager.GetUserId(this.User);
 
             try
             {
