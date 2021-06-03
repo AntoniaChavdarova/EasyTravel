@@ -91,6 +91,7 @@
             services.AddTransient<IDateTimeParserService, DateTimeParserService>();
             services.AddTransient<IContactFormService, ContactFormService>();
             services.AddTransient<IReviewsService, ReviewService>();
+            services.AddTransient<ICitiesService, CitiesService>();
 
         }
 
