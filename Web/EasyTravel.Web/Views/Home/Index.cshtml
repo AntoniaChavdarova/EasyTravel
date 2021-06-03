@@ -6,7 +6,6 @@
 
 }
 
-
 <div class="text-center">
 
     @*<div class="header bg-white">
@@ -86,26 +85,19 @@
     </div>
     <hr />
     <h2>Homes guests love <i class="fas fa-grin-hearts "></i></h2>
+    <div class="owl-carousel owl-theme">
+        @foreach (var property in this.Model.TopRaitings)
+        {
+            <div class="item ">
+                <div class="card-body">
+                    <h5 class="card-title">@property.Name <span class="badge badge-primary">@property.AverageRaiting</span></h5>
+                    <img class="img-fluid" src="@property.MainImageUrl" alt="">
+                    <a asp-controller="Properties" asp-action="ById" asp-route-id="@property.Id" class="btn btn-primary">Go to property</a>
 
-    <div class="container p-5 ">
-        <div class="row">
-
-            @foreach (var property in this.Model.TopRaitings.Take(3))
-            {
-
-                <div class="card col-md-4">
-
-                    <div class="card-body">
-                        <h5 class="card-title">@property.Name <span class="badge badge-primary">@property.AverageRaiting</span></h5>
-                        <img class="img-fluid" src="@property.MainImageUrl" alt="">
-
-                        <a asp-controller="Properties" asp-action="ById" asp-route-id="@property.Id" class="btn btn-primary">Go to property</a>
-
-                    </div>
                 </div>
-            }
 
-        </div>
+            </div>
+        }
 
     </div>
 
@@ -139,13 +131,33 @@
     </div>
 
 
-    // <form method="post" id="antiForgeryForm" style="width: 300px; margin-top: 50px; height: 23px"></form>
+
+
     @section Scripts{
+
+        <script>
+            $('.owl-carousel').owlCarousel({
+                loop: true,
+                center: true,
+                items: 3,
+                margin: 10,
+
+                touchDrag: true,
+                nav: true,
+                responsive: {
+                    0: {
+                        items: 3
+                    },
+
+                }
+            })
+
+        </script>
 
         <script>
             $("#inputlg").autocomplete({
                 source: function (request, response) {
-                 
+
                     $.ajax({
 
                         url: "/api/AutoCompleteSearch",
@@ -154,20 +166,15 @@
                         data: { search: $("#inputlg").val() },
                         contentType: "application/json; charset=utf-8",
                         success: function (data) {
-                          
-                         
+
                             response($.map(data, function (item) {
-                                
+
                                 console.log(item);
                                 return {
 
                                     label: item.name
-                                  
+
                                 }
-
-
-
-
 
                             }));
                         },
