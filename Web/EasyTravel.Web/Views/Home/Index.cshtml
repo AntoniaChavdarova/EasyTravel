@@ -43,11 +43,10 @@
                 <input asp-for="CityName"
                        class="form-control form-control-lg"
                        id="inputlg"
-                                           
                        autocomplete="off"
                        placeholder="Search by city..." />
                 <span asp-validation-for="CityName" class="text-danger"></span>
-            
+
             </div>
             <div class="col-2">
                 <input type="submit"
@@ -140,39 +139,37 @@
     </div>
 
 
-   // <form method="post" id="antiForgeryForm" style="width: 300px; margin-top: 50px; height: 23px"></form>
+    // <form method="post" id="antiForgeryForm" style="width: 300px; margin-top: 50px; height: 23px"></form>
     @section Scripts{
 
         <script>
             $("#inputlg").autocomplete({
                 source: function (request, response) {
-                   //var param = { search: $("#inputlg").val() };
-                   // var antiForgeryToken = $('#antiForgeryForm input[name=__RequestVerificationToken]').val();
+                 
                     $.ajax({
 
                         url: "/api/AutoCompleteSearch",
                         dataType: "json",
-                       
-                        data: { search: $("#inputlg").val() },
-                       // headers: {
-                       //     'X-CSRF-TOKEN': antiForgeryToken
-                       // },
 
+                        data: { search: $("#inputlg").val() },
                         contentType: "application/json; charset=utf-8",
                         success: function (data) {
-                           
+                          
+                         
                             response($.map(data, function (item) {
-
+                                
                                 console.log(item);
                                 return {
-                                    label: JSON.stringify(item.name),
-                                    value: JSON.stringify(item.name)
+
+                                    label: item.name
+                                  
                                 }
 
-                                
+
+
+
 
                             }));
-                         
                         },
 
                     });
