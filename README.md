@@ -24,6 +24,14 @@ Administrator (user role):
 -	can review the appointments history.
 -	view all bookings for all users
 
+![image](https://user-images.githubusercontent.com/66990772/121688200-da9fa700-cacb-11eb-87b1-f23b4f0bfc24.png)
+![image](https://user-images.githubusercontent.com/66990772/121688488-2fdbb880-cacc-11eb-804a-bf064911a17f.png)
+
+![image](https://user-images.githubusercontent.com/66990772/121688286-f2772b00-cacb-11eb-9d65-349288671ea1.png)
+![image](https://user-images.githubusercontent.com/66990772/121688296-f86d0c00-cacb-11eb-87f1-c17a4cfd413f.png)
+
+
+
 ## ⚒️ Built With
 - ASP.NET Core 5.0
 - Entity Framework (EF) Core 5.0
