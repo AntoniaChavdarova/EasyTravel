@@ -1,20 +1,20 @@
 # EasyTravel
 
-ℹ️ How It Works
-Users:
 Search by city name
-Browse categories of property : apartment, house;
-View all properties with the highest raiting
-Read more about the property and the  amenities.
-View the reviews of the property
+•	Browse categories of property : apartment, house;
+•	View all properties with the highest raiting
+•	Read more about the property and the  amenities.
+•	View the reviews of the property
 Logged Users:
-book appointments using interactive datepicker;
-can cancel appointments;
-can rate properties for which they had confirmed past appointments.
+•	book appointments using interactive datepicker;
+•	can cancel appointments;
+•	can rate properties for which they had confirmed past appointments.
 Administrator (user role):
-confirms/declines users' appointments for particular property;
-can review the appointments history.
-view all 
+•	confirms/declines users' appointments for particular property;
+•	can review the appointments history.
+•	view all 
+
+
 
 ⚒️ Built With
 ASP.NET Core 5.0
