@@ -28,7 +28,8 @@ Administrator (user role):
 ![image](https://user-images.githubusercontent.com/66990772/121688488-2fdbb880-cacc-11eb-804a-bf064911a17f.png)
 
 ![image](https://user-images.githubusercontent.com/66990772/121688286-f2772b00-cacb-11eb-9d65-349288671ea1.png)
-![image](https://user-images.githubusercontent.com/66990772/121688296-f86d0c00-cacb-11eb-87f1-c17a4cfd413f.png)
+![image](https://user-images.githubusercontent.com/66990772/121693737-12115200-cad2-11eb-8bb4-072714af302e.png)
+
 ![image](https://user-images.githubusercontent.com/66990772/121690223-408d2e00-cace-11eb-9fb6-0fe7e5885c84.png)
 
 
