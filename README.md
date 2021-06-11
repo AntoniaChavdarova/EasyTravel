@@ -32,7 +32,8 @@ Administrator (user role):
 
 ![image](https://user-images.githubusercontent.com/66990772/121690223-408d2e00-cace-11eb-9fb6-0fe7e5885c84.png)
 
-
+## Database diagram :chart_with_upwards_trend:
+![DatabaseDiagram1](https://user-images.githubusercontent.com/66990772/121698818-0ecc9500-cad7-11eb-9290-854992d2314e.png)
 
 
 ## ⚒️ Built With
