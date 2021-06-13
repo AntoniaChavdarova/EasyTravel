@@ -16,7 +16,7 @@ Logged Users:
 - have the opportunity to upload profile picture and add some additional information in their profiles
 -	book appointments using interactive datepicker;
 -	can cancel appointments;
--	can rate properties for which they had confirmed past appointments.
+-	can write reviews about properties for which they had confirmed past appointments.
 -	can contact the administrator
 
 Administrator (user role):
