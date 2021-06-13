@@ -8,7 +8,7 @@ A guest can also contact the support of the website. In order to send requests t
 Unsigned users have these options:
 - Search by city name
 - Choose a category : apartment or house
--	View all properties with the highest raiting
+-	View all properties with the highest rating
 -	Read more about the property and the amenities.
 -	View the reviews of the property
 
