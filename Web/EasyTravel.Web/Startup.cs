@@ -92,6 +92,7 @@
             services.AddTransient<IContactFormService, ContactFormService>();
             services.AddTransient<IReviewsService, ReviewService>();
             services.AddTransient<ICitiesService, CitiesService>();
+            services.AddTransient<IGeoService, GeoService>();
 
         }
 

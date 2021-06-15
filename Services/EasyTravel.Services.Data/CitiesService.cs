@@ -1,9 +1,8 @@
 ﻿namespace EasyTravel.Services.Data
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Threading.Tasks;
+
     using EasyTravel.Data.Common.Repositories;
     using EasyTravel.Data.Models;
     using EasyTravel.Services.Mapping;

@@ -1,7 +1,7 @@
 ﻿namespace EasyTravel.Web.Controllers
 {
     using System.Diagnostics;
-
+    using EasyTravel.Services;
     using EasyTravel.Services.Data;
     using EasyTravel.Web.ViewModels;
     using EasyTravel.Web.ViewModels.AllProperties;
@@ -13,15 +13,18 @@
         private readonly ICategoriesService categoriesService;
         private readonly IPropertiesService propertiesService;
         private readonly ISearchService searchService;
+        private readonly IGeoService geoService;
 
         public HomeController(
             ICategoriesService categoriesService,
             IPropertiesService propertiesService,
-            ISearchService searchService)
+            ISearchService searchService,
+            IGeoService geoService)
         {
             this.categoriesService = categoriesService;
             this.propertiesService = propertiesService;
             this.searchService = searchService;
+            this.geoService = geoService;
         }
 
         public IActionResult Index(InputSeacrhViewModel input)
@@ -63,6 +66,9 @@
 
         public IActionResult Privacy()
         {
+            geoService.GetLatLongFromAddress("Dunav", "Septemvri", "Bulgaria");
+            ;
+
             return this.View();
         }
 
