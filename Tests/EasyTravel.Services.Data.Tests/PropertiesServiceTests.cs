@@ -1,28 +1,99 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Threading.Tasks;
-using EasyTravel.Data;
-using EasyTravel.Data.Common.Repositories;
-using EasyTravel.Data.Models;
-using EasyTravel.Data.Repositories;
-using EasyTravel.Services.Mapping;
-using EasyTravel.Web.ViewModels;
-using EasyTravel.Web.ViewModels.AllProperties;
-using EasyTravel.Web.ViewModels.Search;
-using Microsoft.EntityFrameworkCore;
-using Moq;
-using Xunit;
-
-
-namespace EasyTravel.Services.Data.Tests
+﻿namespace EasyTravel.Services.Data.Tests
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Reflection;
+    using System.Threading.Tasks;
+
+    using EasyTravel.Data;
+    using EasyTravel.Data.Common.Repositories;
+    using EasyTravel.Data.Models;
+    using EasyTravel.Data.Repositories;
+    using EasyTravel.Services.Mapping;
+    using Microsoft.EntityFrameworkCore;
+    using Moq;
+    using Xunit;
+
     public class PropertiesServiceTests
     {
         public PropertiesServiceTests()
         {
             AutoMapperConfig.RegisterMappings(typeof(TestModelProp).GetTypeInfo().Assembly);
+        }
+
+        [Fact]
+        public void GetPropertiesByCategoryNameShouldWorkCorrectly()
+        {
+            var categoryApartment = new Category
+            {
+                Name = "Apartment",
+                Id = 1,
+            };
+
+            var categoryHouse = new Category
+            {
+                Name = "House",
+                Id = 2,
+            };
+
+            var moqRepository = new Mock<IDeletableEntityRepository<Property>>();
+            moqRepository.Setup(x => x.AllAsNoTracking())
+                 .Returns(new List<Property>()
+                {
+                    new Property
+                    {
+                        Name = "Apartment",
+                        Category = categoryApartment,
+                    },
+                    new Property
+                    {
+                        Name = "House",
+                        Category = categoryHouse,
+                    },
+                }.AsQueryable());
+
+            var propertiesService = new PropertiesService(moqRepository.Object);
+            var properties = propertiesService.GetPropertiesByCategoryName<TestModelProp>(1, 1, 1);
+
+            Assert.Equal(1, properties.Count());
+        }
+
+        [Fact]
+        public void GetCountShouldWorkCorrectly()
+        {
+            var categoryApartment = new Category
+            {
+                Name = "Apartment",
+                Id = 1,
+            };
+
+            var categoryHouse = new Category
+            {
+                Name = "House",
+                Id = 2,
+            };
+
+            var moqRepository = new Mock<IDeletableEntityRepository<Property>>();
+            moqRepository.Setup(x => x.AllAsNoTracking())
+                 .Returns(new List<Property>()
+                {
+                    new Property
+                    {
+                        Name = "Apartment",
+                        Category = categoryApartment,
+                    },
+                    new Property
+                    {
+                        Name = "House",
+                        Category = categoryHouse,
+                    },
+                }.AsQueryable());
+
+            var propertiesService = new PropertiesService(moqRepository.Object);
+            var countSuchProperties = propertiesService.GetCount(1);
+
+            Assert.Equal(1, countSuchProperties);
         }
 
         [Fact]
