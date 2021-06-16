@@ -1,4 +1,5 @@
-﻿namespace EasyTravel.Data.Repositories
+﻿
+namespace EasyTravel.Data.Repositories
 {
     using System;
     using System.Linq;

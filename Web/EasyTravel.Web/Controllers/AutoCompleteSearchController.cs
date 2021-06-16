@@ -22,17 +22,10 @@
             this.citiesRepository = citiesRepository;
         }
 
-        //public ActionResult<SearchResponseModelInList> AutocompleteSearch(string search)
-        //     {
-        //         var cities = this.citiesService.GetAllCitiesBySearchName<SearchResponseModel>(search);
-
-        //         return new SearchResponseModelInList { Cities = cities.ToList() };
-        //     }
-
         public JsonResult AutoComplete(string search)
         {
             var cities = this.citiesRepository.AllAsNoTracking()
-                .Where(x => x.Name.Contains(search))
+                .Where(x => x.Name.StartsWith(search))
                 .ToList();
 
             return this.Json(cities);

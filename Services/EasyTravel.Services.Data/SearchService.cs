@@ -17,7 +17,7 @@
             this.propertiesRepository = propertiesRepository;
         }
 
-        public IEnumerable<T> SearchByCityNameAndCapacity<T>(string cityName)
+        public IEnumerable<T> SearchByCityName<T>(string cityName)
         {
             var cities = this.propertiesRepository.AllAsNoTracking()
                 .Where(x => x.City.Name == cityName)

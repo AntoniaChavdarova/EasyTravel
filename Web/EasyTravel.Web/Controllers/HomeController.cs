@@ -52,13 +52,12 @@
             return this.RedirectToAction("Results", model);
         }
 
-        // rezultata
         [HttpGet]
         public IActionResult Results(SearchFormModel model)
         {
             var viewModel = new PropertiesViewModel
             {
-                Properties = this.searchService.SearchByCityNameAndCapacity<PropertyInListViewModel>(model.CityName),
+                Properties = this.searchService.SearchByCityName<PropertyInListViewModel>(model.CityName),
             };
 
             return this.View(viewModel);

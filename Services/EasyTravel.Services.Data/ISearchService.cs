@@ -4,6 +4,6 @@
 
     public interface ISearchService
     {
-        IEnumerable<T> SearchByCityNameAndCapacity<T>(string cityName);
+        IEnumerable<T> SearchByCityName<T>(string cityName);
     }
 }

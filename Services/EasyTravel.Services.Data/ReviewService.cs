@@ -21,13 +21,10 @@
                 Content = content,
                 PropertyId = propertyId,
                 UserId = userId,
-              
             };
 
             await this.reviewsRepository.AddAsync(review);
             await this.reviewsRepository.SaveChangesAsync();
         }
-          
-           
     }
 }

@@ -10,14 +10,10 @@
 
     public class PropertiesService : IPropertiesService
     {
-        private readonly IDeletableEntityRepository<Category> categoriesRepository;
         private readonly IDeletableEntityRepository<Property> propertiesRepository;
 
-        public PropertiesService(
-            IDeletableEntityRepository<Category> categoriesRepository,
-            IDeletableEntityRepository<Property> propertiesRepository)
+        public PropertiesService(IDeletableEntityRepository<Property> propertiesRepository)
         {
-            this.categoriesRepository = categoriesRepository;
             this.propertiesRepository = propertiesRepository;
         }
 
