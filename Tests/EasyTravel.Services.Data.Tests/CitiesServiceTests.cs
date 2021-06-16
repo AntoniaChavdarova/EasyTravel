@@ -1,17 +1,15 @@
 ﻿namespace EasyTravel.Services.Data.Tests
 {
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Reflection;
+
     using EasyTravel.Data.Common.Repositories;
     using EasyTravel.Data.Models;
     using EasyTravel.Services.Mapping;
     using EasyTravel.Web.ViewModels;
     using EasyTravel.Web.ViewModels.Search;
     using Moq;
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Reflection;
-    using System.Text;
-    using System.Threading.Tasks;
     using Xunit;
 
     public class CitiesServiceTests

@@ -44,7 +44,6 @@
             Assert.Equal(2, allCategories.Count());
             Assert.Equal("Apartments", allCategories.FirstOrDefault().Name);
             Assert.Equal("xxx", allCategories.FirstOrDefault().RemoteImageUrl);
-            //Assert.Contains(new CategoryInListViewModel { Name = "Houses" }, allCategories);
         }
     }
 }
