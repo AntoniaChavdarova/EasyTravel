@@ -35,7 +35,7 @@
                 throw new Exception($"The dates are not available ");
             }
 
-            if (!this.IsDatesBettweenExistingReservation(propertyId, checkIn, checkOut))
+            if (!this.IsDatesBetweenExistingReservation(propertyId, checkIn, checkOut))
             {
                 throw new Exception($"The dates are not available ");
             }
@@ -107,7 +107,7 @@
             await this.bookingsRepository.SaveChangesAsync();
         }
 
-        private bool IsDatesBettweenExistingReservation(int propertyId, DateTime checkIn, DateTime checkOut)
+        private bool IsDatesBetweenExistingReservation(int propertyId, DateTime checkIn, DateTime checkOut)
         {
             var booking = this.bookingsRepository.AllAsNoTracking()
              .FirstOrDefault(x => x.PropertyId == propertyId && checkIn >= x.CheckIn  && checkOut <= x.CheckOut);
@@ -118,8 +118,6 @@
             }
 
             return false;
-
-
         }
 
         private bool IsCheckInBettweenExistingReservation(int propertyId, DateTime checkIn, DateTime checkOut)
