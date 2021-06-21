@@ -8,58 +8,58 @@
 
 
 
+<div class="jumbotron bg-primary text-white">
+    <h3 class="display-5 text-white">Filter your choice</h3>
+    <p class="lead">Find your the perfect property for you and your family or friends.Filter by capacity and save time.
+        <i class="fas fa-hourglass-half"></i></p>
+   
+    <div class="row">
 
-<div class="flex-grow-3">
-    <div class="alert alert-primary" role="alert">
-        <strong>Filtering</strong> Filter your choice easily by selecting range of price for your property
+        <div class="col-md-4">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1"><i class="fas fa-user"></i></span>
+                </div>
+                <input type="text" class="form-control" id="amount" placeholder="Capacity" aria-label="Username" aria-describedby="basic-addon1">
+            </div>
+        </div>
+        <div class="col-md-8" id="slider"></div>
+
     </div>
-
-    <p>
-        <label for="amount">Capacity range</label>
-        <input type="text" id="amount" readonly />
-
-    <div id="slider" ></div>
-    </p>
-
 </div>
 
-    <br />
-    <br />
 
-    @*<div class="flex-grow-3">
-            <div class="wrapper">
-                <div id="demo-slider-handles">
-                    <div id="input-slider-range" data-range-value-min="0" data-range-value-max="12"></div>
-                    <div class="row">
-                        <div class="col">
-                            <span class="range-slider-value value-low" data-range-value-low="0" id="input-slider-range-value-low"></span>
-                        </div>
-                        <div class="col text-right">
-                            <span class="range-slider-value value-high" data-range-value-high="12" id="input-slider-range-value-high"></span>
-                        </div>
+<br />
+
+@*<div class="flex-grow-3">
+        <div class="wrapper">
+            <div id="demo-slider-handles">
+                <div id="input-slider-range" data-range-value-min="0" data-range-value-max="12"></div>
+                <div class="row">
+                    <div class="col">
+                        <span class="range-slider-value value-low" data-range-value-low="0" id="input-slider-range-value-low"></span>
+                    </div>
+                    <div class="col text-right">
+                        <span class="range-slider-value value-high" data-range-value-high="12" id="input-slider-range-value-high"></span>
                     </div>
                 </div>
             </div>
-        </div>*@
-    <div class="row" id="filters">
+        </div>
+    </div>*@
+<div class="row" id="filters">
+    <partial name="_PartialPropertiesInListViewModel" model="@Model" />
+</div>
 
+<script src="~/lib/nouislider/js/nouislider.js"></script>
 
-        <partial name="_PartialPropertiesInListViewModel" model="@Model" />
-
-    </div>
-
-
-    <script src="~/lib/nouislider/js/nouislider.js"></script>
-
-
-    @section Scripts{
-        <script>
+@section Scripts{
+    <script>
         $(function () {
             $("#slider").slider({
-                range: true,                 
+                range: true,
                 min: 0,
                 max: 12,
-                
+
                 values: [1, 12],
                 slide: function (event, ui) {
                     $("#amount").val(ui.values[0] + " - " + ui.values[1]);
@@ -70,13 +70,10 @@
                     $.ajax({
                         type: 'GET',
                         url: "/api/Filter",
-
                         data: { id: id, min: min, max: max },
-
 
                     }).done(function (responce) {
                        //$("#filters").html(""); //clear the records content
-
                         $('#filters').html().replaceWith($('#filters').html(responce));
 
                     });
@@ -85,8 +82,6 @@
             });
         });
 
-
-
-        </script>
-    }
+    </script>
+}
 

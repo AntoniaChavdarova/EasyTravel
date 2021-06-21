@@ -6,6 +6,5 @@
     {
         public IEnumerable<PropertyInListViewModel> Properties { get; set; }
 
-        public IEnumerable<FilterPropertiesInListViewModel> Filters { get; set; }
     }
 }
