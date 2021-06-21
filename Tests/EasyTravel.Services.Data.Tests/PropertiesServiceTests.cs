@@ -11,6 +11,7 @@
     using EasyTravel.Data.Models;
     using EasyTravel.Data.Repositories;
     using EasyTravel.Services.Mapping;
+    using EasyTravel.Web.ViewModels.AllProperties;
     using Microsoft.EntityFrameworkCore;
     using Moq;
     using Xunit;
@@ -37,6 +38,7 @@
                 Id = 2,
             };
 
+            AutoMapperConfig.RegisterMappings(typeof(TestModelProp).GetTypeInfo().Assembly);
             var moqRepository = new Mock<IDeletableEntityRepository<Property>>();
             moqRepository.Setup(x => x.AllAsNoTracking())
                  .Returns(new List<Property>()
@@ -177,6 +179,34 @@
             Assert.Equal("Apartment SvetiVlas", result);
         }
 
+        [Fact]
+        public async Task FilterByCapacityShouldWorkCorrectly()
+        {
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+        .UseInMemoryDatabase(Guid.NewGuid().ToString());
+            AutoMapperConfig.RegisterMappings(typeof(TestModel).GetTypeInfo().Assembly);
+            var repository = new EfDeletableEntityRepository<Property>(new ApplicationDbContext(options.Options));
+            var property1 = new Property
+            {
+                Name = "Apartment Sozopol",
+                Capacity = 7,
+                CategoryId = 2,
+            };
+            await repository.AddAsync(property1);
+            var property2 = new Property
+            {
+                Name = "Apartment SvetiVlas",
+                Capacity = 2,
+                CategoryId = 1,
+            };
+            await repository.AddAsync(property2);
+            await repository.SaveChangesAsync();
+            var propertiesService = new PropertiesService(repository);
+            var list = propertiesService.FilterByCapacity<TestModel>(1, 1, 5);
+
+            Assert.Equal("Apartment SvetiVlas", list.FirstOrDefault().Name);
+        }
+
         public class TestModelProp : IMapFrom<Property>
         {
             public int Id { get; set; }
@@ -184,6 +214,15 @@
             public string Name { get; set; }
 
             public double AverageRaiting { get; set; }
+        }
+
+        public class TestModel : IMapFrom<Property>
+        {
+            public int CategoryId { get; set; }
+
+            public string Name { get; set; }
+
+            public int Capacity { get; set; }
         }
     }
 }

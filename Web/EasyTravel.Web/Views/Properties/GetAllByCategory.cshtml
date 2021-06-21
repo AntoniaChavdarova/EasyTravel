@@ -6,13 +6,13 @@
 
 <link href="~/lib/nouislider/css/nouislider.css" rel="stylesheet" />
 
-
-
 <div class="jumbotron bg-primary text-white">
     <h3 class="display-5 text-white">Filter your choice</h3>
-    <p class="lead">Find your the perfect property for you and your family or friends.Filter by capacity and save time.
-        <i class="fas fa-hourglass-half"></i></p>
-   
+    <p class="lead">
+        Find your the perfect property for you and your family or friends.Filter by capacity and save time.
+        <i class="fas fa-hourglass-half"></i>
+    </p>
+
     <div class="row">
 
         <div class="col-md-4">
@@ -28,24 +28,8 @@
     </div>
 </div>
 
-
 <br />
 
-@*<div class="flex-grow-3">
-        <div class="wrapper">
-            <div id="demo-slider-handles">
-                <div id="input-slider-range" data-range-value-min="0" data-range-value-max="12"></div>
-                <div class="row">
-                    <div class="col">
-                        <span class="range-slider-value value-low" data-range-value-low="0" id="input-slider-range-value-low"></span>
-                    </div>
-                    <div class="col text-right">
-                        <span class="range-slider-value value-high" data-range-value-high="12" id="input-slider-range-value-high"></span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>*@
 <div class="row" id="filters">
     <partial name="_PartialPropertiesInListViewModel" model="@Model" />
 </div>

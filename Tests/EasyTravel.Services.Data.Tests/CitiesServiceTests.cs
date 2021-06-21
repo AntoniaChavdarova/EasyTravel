@@ -16,7 +16,7 @@
     {
         public CitiesServiceTests()
         {
-            AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
+            AutoMapperConfig.RegisterMappings(typeof(TestModel).GetTypeInfo().Assembly);
         }
 
         [Fact]
@@ -43,12 +43,16 @@
 
             var citiesService = new CitiesService(moqRepository.Object);
 
-            var allCities = citiesService.GetAllCitiesBySearchName<SearchResponseModel>("S");
+            var allCities = citiesService.GetAllCitiesBySearchName<TestModel>("S");
 
             Assert.Equal(2, allCities.Count());
-            Assert.DoesNotContain(new SearchResponseModel{Name = "Varna"}, allCities);
+            Assert.DoesNotContain(new TestModel{Name = "Varna"}, allCities);
             Assert.Equal("Sofia", allCities.FirstOrDefault().Name);
         }
 
+        public class TestModel : IMapFrom<City>
+        {
+            public string Name { get; set; }
+        }
     }
 }

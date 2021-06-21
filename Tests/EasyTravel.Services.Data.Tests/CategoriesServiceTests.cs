@@ -7,8 +7,7 @@
     using EasyTravel.Data.Common.Repositories;
     using EasyTravel.Data.Models;
     using EasyTravel.Services.Mapping;
-    using EasyTravel.Web.ViewModels;
-    using EasyTravel.Web.ViewModels.Home;
+
     using Moq;
     using Xunit;
 
@@ -16,7 +15,7 @@
     {
         public CategoriesServiceTests()
         {
-            AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
+            AutoMapperConfig.RegisterMappings(typeof(TestModel).GetTypeInfo().Assembly);
         }
 
         [Fact]
@@ -29,7 +28,6 @@
                     new Category
                     {
                         Name = "Apartments",
-                        RemoteImageUrl = "xxx",
                     },
                     new Category
                     {
@@ -39,11 +37,15 @@
 
             var categoryService = new CategoriesService(moqRepository.Object);
 
-            var allCategories = categoryService.GetAllCategories<CategoryInListViewModel>();
+            var allCategories = categoryService.GetAllCategories<TestModel>();
 
             Assert.Equal(2, allCategories.Count());
             Assert.Equal("Apartments", allCategories.FirstOrDefault().Name);
-            Assert.Equal("xxx", allCategories.FirstOrDefault().RemoteImageUrl);
+        }
+
+        public class TestModel : IMapFrom<Category>
+        {
+            public string Name { get; set; }
         }
     }
 }
