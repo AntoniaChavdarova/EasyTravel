@@ -58,5 +58,18 @@
                 .Where(x => x.Category.Id == id)
                 .Count();
         }
+
+        public IEnumerable<T> FilterByCapacity<T>(int id, int min, int max)
+        {
+            var query = this.propertiesRepository.AllAsNoTracking()
+                .Where(x => x.CategoryId == id);
+
+            var properties = query
+                .Where(x => x.Capacity >= min && x.Capacity <= max)
+                .To<T>()
+                .ToList();
+
+            return properties;
+        }
     }
 }

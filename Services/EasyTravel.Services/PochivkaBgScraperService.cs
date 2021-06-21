@@ -14,24 +14,24 @@
 
     public class PochivkaBgScraperService : IPochivkaBgScraperService
     {
-       //private const string BaseUrl = "https://pochivka.bg/apartamenti-a4";
-         private const string BaseUrl = "https://pochivka.bg/kashti-a3";
+        //private const string BaseUrl = "https://pochivka.bg/apartamenti-a4";
+        private const string BaseUrl = "https://pochivka.bg/kashti-a3";
 
-       private readonly IBrowsingContext context;
-       private readonly IDeletableEntityRepository<Property> propertiesRepository;
-       private readonly IDeletableEntityRepository<Category> categoriesRepository;
-       private readonly IDeletableEntityRepository<City> citiesRepository;
-       private readonly IRepository<Amenity> amenitiesRepository;
-       private readonly IRepository<PropertyAmenity> propAmenitiesRepository;
-       private readonly IRepository<Image> imagesRepository;
+        private readonly IBrowsingContext context;
+        private readonly IDeletableEntityRepository<Property> propertiesRepository;
+        private readonly IDeletableEntityRepository<Category> categoriesRepository;
+        private readonly IDeletableEntityRepository<City> citiesRepository;
+        private readonly IRepository<Amenity> amenitiesRepository;
+        private readonly IRepository<PropertyAmenity> propAmenitiesRepository;
+        private readonly IRepository<Image> imagesRepository;
 
-       public PochivkaBgScraperService(
-            IDeletableEntityRepository<Property> propertyRepository,
-            IRepository<Amenity> amenitiesRepository,
-            IRepository<Image> imagesRepository,
-            IDeletableEntityRepository<Category> categoriesRepository,
-            IDeletableEntityRepository<City> citiesRepository,
-            IRepository<PropertyAmenity> propAmenitiesRepository)
+        public PochivkaBgScraperService(
+           IDeletableEntityRepository<Property> propertyRepository,
+           IRepository<Amenity> amenitiesRepository,
+           IRepository<Image> imagesRepository,
+           IDeletableEntityRepository<Category> categoriesRepository,
+           IDeletableEntityRepository<City> citiesRepository,
+           IRepository<PropertyAmenity> propAmenitiesRepository)
         {
             this.propertiesRepository = propertyRepository;
             this.amenitiesRepository = amenitiesRepository;
@@ -44,7 +44,7 @@
             this.context = BrowsingContext.New(config);
         }
 
-       public async Task ImportRecipesAsync(int fromId, int toId)
+        public async Task ImportRecipesAsync(int fromId, int toId)
         {
             var concurrentBag = this.ScrapeProperty(fromId, toId);
 
@@ -76,8 +76,8 @@
 
                     var propertyAmenity = new PropertyAmenity
                     {
-                       AmenityId = amenityId,
-                       Property = newProperty,
+                        AmenityId = amenityId,
+                        Property = newProperty,
                     };
                     await this.propAmenitiesRepository.AddAsync(propertyAmenity);
                     await this.propAmenitiesRepository.SaveChangesAsync();
@@ -99,7 +99,7 @@
             await this.propertiesRepository.SaveChangesAsync();
         }
 
-       private ConcurrentBag<PropertyDto> ScrapeProperty(int fromId, int toId)
+        private ConcurrentBag<PropertyDto> ScrapeProperty(int fromId, int toId)
         {
             var concurrentBag = new ConcurrentBag<PropertyDto>();
             Parallel.For(fromId, toId + 1, i =>
@@ -117,7 +117,7 @@
             return concurrentBag;
         }
 
-       private PropertyDto GetProperty(int id)
+        private PropertyDto GetProperty(int id)
         {
             var url = BaseUrl + $"/{id}";
 
@@ -146,65 +146,65 @@
             var property1 = new PropertyDto();
 
             foreach (var l in links)
+            {
+                var hhh = "https:" + l;
+                var page = this.context
+               .OpenAsync(hhh)
+               .GetAwaiter()
+               .GetResult();
+
+                var property = new PropertyDto();
+
+                property.OriginalUrl = hhh;
+                var category = page.QuerySelector("#breadcrumbs > ul > li:nth-child(2) > a");
+                property.CategoryName = category.TextContent.TrimStart();
+
+                var titlePage = page.QuerySelector(" .page-title > .pull-left > h1");
+                property.Name = titlePage.TextContent;
+                var phone = page.QuerySelector("#popup_phone > div.content > div.pull-left");
+                property.PhoneNumber = phone.TextContent.TrimStart();
+                var address = page.QuerySelector("#popup_address > div.content");
+                property.Address = address.TextContent.TrimStart();
+                var city = page.QuerySelector("body > div.container > div > div.property-view.vip > div:nth-child(1) > div > div > div > div.sub-title");
+                property.CityName = city.TextContent;
+                var descriptionPage = page.QuerySelector("div.col-4.margin-0.pull-right > div.description");
+                property.Description = descriptionPage.TextContent.TrimStart();
+                var amenities = page.QuerySelectorAll("div.col-4 > div.extras > ul > li")
+                   .Select(x => x.TextContent)
+                  .ToList();
+
+                property.Amenities.AddRange(amenities);
+
+                var tablewithInfo = page.QuerySelectorAll("#prices > table > tbody > tr > td").Select(x => x.TextContent)
+                    .ToList();
+
+                var count = int.Parse(tablewithInfo[1]);
+                property.SummerPrice = tablewithInfo[3];
+                property.WinterPrice = tablewithInfo[5];
+                property.Capacity = count;
+
+                var mainImg = page.QuerySelector(".gallery-slider > li > img").GetAttribute("src");
+                property.MainImageUrl = mainImg;
+
+                var imgElements = page.GetElementsByClassName("gallery-slider");
+
+                foreach (var img in imgElements)
                 {
-                    var hhh = "https:" + l;
-                    var page = this.context
-                   .OpenAsync(hhh)
-                   .GetAwaiter()
-                   .GetResult();
-
-                    var property = new PropertyDto();
-
-                    property.OriginalUrl = hhh;
-                    var category = page.QuerySelector("#breadcrumbs > ul > li:nth-child(2) > a");
-                    property.CategoryName = category.TextContent.TrimStart();
-
-                    var titlePage = page.QuerySelector(" .page-title > .pull-left > h1");
-                    property.Name = titlePage.TextContent;
-                    var phone = page.QuerySelector("#popup_phone > div.content > div.pull-left");
-                    property.PhoneNumber = phone.TextContent.TrimStart();
-                    var address = page.QuerySelector("#popup_address > div.content");
-                    property.Address = address.TextContent.TrimStart();
-                    var city = page.QuerySelector("body > div.container > div > div.property-view.vip > div:nth-child(1) > div > div > div > div.sub-title");
-                    property.CityName = city.TextContent;
-                    var descriptionPage = page.QuerySelector("div.col-4.margin-0.pull-right > div.description");
-                    property.Description = descriptionPage.TextContent.TrimStart();
-                    var amenities = page.QuerySelectorAll("div.col-4 > div.extras > ul > li")
-                       .Select(x => x.TextContent)
-                      .ToList();
-
-                    property.Amenities.AddRange(amenities);
-
-                    var tablewithInfo = page.QuerySelectorAll("#prices > table > tbody > tr > td").Select(x => x.TextContent)
-                        .ToList();
-
-                    var count = int.Parse(tablewithInfo[1]);
-                    property.SummerPrice = tablewithInfo[3];
-                    property.WinterPrice = tablewithInfo[5];
-                    property.Capacity = count;
-
-                    var mainImg = page.QuerySelector(".gallery-slider > li > img").GetAttribute("src");
-                    property.MainImageUrl = mainImg;
-
-                    var imgElements = page.GetElementsByClassName("gallery-slider");
-
-                    foreach (var img in imgElements)
+                    var image = img.QuerySelectorAll("img");
+                    foreach (var one in image)
                     {
-                        var image = img.QuerySelectorAll("img");
-                        foreach (var one in image)
-                        {
-                            var linkOfPhoto = one.GetAttribute("content");
-                            property.Images.Add(linkOfPhoto);
-                        }
+                        var linkOfPhoto = one.GetAttribute("content");
+                        property.Images.Add(linkOfPhoto);
                     }
-
-                    property1 = property;
                 }
 
-            return property1;
-       }
+                property1 = property;
+            }
 
-       private async Task<int> GetOrCreateCategoryAsync(string categoryName)
+            return property1;
+        }
+
+        private async Task<int> GetOrCreateCategoryAsync(string categoryName)
         {
             var category = this.categoriesRepository
                 .AllAsNoTracking()
@@ -226,7 +226,7 @@
             return category.Id;
         }
 
-       private async Task<int> GetOrCreateCityAsync(string cityName)
+        private async Task<int> GetOrCreateCityAsync(string cityName)
         {
             var city = this.citiesRepository
                 .AllAsNoTracking()
@@ -248,8 +248,8 @@
             return city.Id;
         }
 
-       private async Task<int> GetOrCreateAmenitytAsync(string name)
-       {
+        private async Task<int> GetOrCreateAmenitytAsync(string name)
+        {
             var amenity = this.amenitiesRepository
                 .AllAsNoTracking()
                 .FirstOrDefault(x => x.Name == name);
@@ -268,6 +268,6 @@
             await this.amenitiesRepository.SaveChangesAsync();
 
             return amenity.Id;
-       }
+        }
     }
 }

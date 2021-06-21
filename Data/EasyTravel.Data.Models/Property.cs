@@ -1,8 +1,6 @@
 ﻿namespace EasyTravel.Data.Models
 {
-    using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
 
     using EasyTravel.Common;
@@ -50,7 +48,7 @@
         public int CityId { get; set; }
 
         public virtual City City { get; set; }
-    
+
         public virtual ICollection<Booking> Bookings { get; set; }
 
         public virtual ICollection<Image> Images { get; set; }

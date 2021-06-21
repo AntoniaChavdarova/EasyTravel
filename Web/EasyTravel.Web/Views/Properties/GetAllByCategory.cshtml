@@ -4,9 +4,89 @@
     this.ViewData["Title"] = "Properties by category";
 }
 
-<div class="row">
+<link href="~/lib/nouislider/css/nouislider.css" rel="stylesheet" />
 
-    <partial name="_PartialPropertiesInListViewModel" model="@Model" />
-   
+
+
+
+<div class="flex-grow-3">
+    <div class="alert alert-primary" role="alert">
+        <strong>Filtering</strong> Filter your choice easily by selecting range of price for your property
+    </div>
+
+    <p>
+        <label for="amount">Capacity range</label>
+        <input type="text" id="amount" readonly />
+
+    <div id="slider" ></div>
+    </p>
+
 </div>
+
+    <br />
+    <br />
+
+    @*<div class="flex-grow-3">
+            <div class="wrapper">
+                <div id="demo-slider-handles">
+                    <div id="input-slider-range" data-range-value-min="0" data-range-value-max="12"></div>
+                    <div class="row">
+                        <div class="col">
+                            <span class="range-slider-value value-low" data-range-value-low="0" id="input-slider-range-value-low"></span>
+                        </div>
+                        <div class="col text-right">
+                            <span class="range-slider-value value-high" data-range-value-high="12" id="input-slider-range-value-high"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>*@
+    <div class="row" id="filters">
+
+
+        <partial name="_PartialPropertiesInListViewModel" model="@Model" />
+
+    </div>
+
+
+    <script src="~/lib/nouislider/js/nouislider.js"></script>
+
+
+    @section Scripts{
+        <script>
+        $(function () {
+            $("#slider").slider({
+                range: true,                 
+                min: 0,
+                max: 12,
+                
+                values: [1, 12],
+                slide: function (event, ui) {
+                    $("#amount").val(ui.values[0] + " - " + ui.values[1]);
+                    var id = @ViewContext.RouteData.Values["id"];
+                    var min = ui.values[0];
+                    var max = ui.values[1];
+
+                    $.ajax({
+                        type: 'GET',
+                        url: "/api/Filter",
+
+                        data: { id: id, min: min, max: max },
+
+
+                    }).done(function (responce) {
+                       //$("#filters").html(""); //clear the records content
+
+                        $('#filters').html().replaceWith($('#filters').html(responce));
+
+                    });
+
+                }
+            });
+        });
+
+
+
+        </script>
+    }
 

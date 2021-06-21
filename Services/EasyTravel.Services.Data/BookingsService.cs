@@ -110,7 +110,7 @@
         private bool IsDatesBetweenExistingReservation(int propertyId, DateTime checkIn, DateTime checkOut)
         {
             var booking = this.bookingsRepository.AllAsNoTracking()
-             .FirstOrDefault(x => x.PropertyId == propertyId && checkIn >= x.CheckIn  && checkOut <= x.CheckOut);
+             .FirstOrDefault(x => x.PropertyId == propertyId && checkIn >= x.CheckIn && checkOut <= x.CheckOut);
 
             if (booking == null)
             {
@@ -152,7 +152,7 @@
         private bool IsDatesAvailable(int propertyId, DateTime checkIn, DateTime checkOut)
         {
             var booking = this.bookingsRepository.AllAsNoTracking()
-               .FirstOrDefault( x => x.PropertyId == propertyId && x.CheckIn == checkIn && x.CheckOut == checkOut);
+               .FirstOrDefault(x => x.PropertyId == propertyId && x.CheckIn == checkIn && x.CheckOut == checkOut);
 
             if (booking == null)
             {

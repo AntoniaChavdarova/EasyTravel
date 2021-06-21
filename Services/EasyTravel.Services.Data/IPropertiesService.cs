@@ -6,6 +6,8 @@
     {
         public IEnumerable<T> GetPropertiesByCategoryName<T>(int id, int page, int itemsPerPage);
 
+        public IEnumerable<T> FilterByCapacity<T>(int id, int min, int max);
+
         public T GetById<T>(int id);
 
         public IEnumerable<T> GetTheHighestRaitingProperties<T>();

@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace EasyTravel.Services
+﻿namespace EasyTravel.Services
 {
+    using System;
+
     public interface IDateTimeParserService
     {
         DateTime ConvertStrings(string date);
     }
-        
 }

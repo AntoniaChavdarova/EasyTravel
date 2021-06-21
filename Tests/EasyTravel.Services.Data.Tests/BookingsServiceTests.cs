@@ -10,7 +10,6 @@
     using EasyTravel.Data.Repositories;
     using EasyTravel.Services.Mapping;
     using Microsoft.EntityFrameworkCore;
-    using Moq;
     using Xunit;
 
     public class BookingsServiceTests

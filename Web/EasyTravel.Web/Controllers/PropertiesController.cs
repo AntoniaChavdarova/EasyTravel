@@ -1,5 +1,7 @@
 ﻿namespace EasyTravel.Web.Controllers
 {
+    using EasyTravel.Data.Common.Repositories;
+    using EasyTravel.Data.Models;
     using EasyTravel.Services.Data;
     using EasyTravel.Web.ViewModels.AllProperties;
     using EasyTravel.Web.ViewModels.Reviews;
@@ -10,7 +12,8 @@
         private readonly IPropertiesService propertiesService;
 
         public PropertiesController(
-            IPropertiesService propertiesService)
+            IPropertiesService propertiesService,
+            IDeletableEntityRepository<Property> propertiesRepository)
         {
             this.propertiesService = propertiesService;
         }
@@ -47,6 +50,5 @@
 
             return this.View(property);
         }
-
     }
 }

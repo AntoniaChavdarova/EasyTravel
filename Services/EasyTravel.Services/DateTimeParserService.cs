@@ -1,11 +1,10 @@
-﻿using EasyTravel.Common;
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Text;
-
-namespace EasyTravel.Services
+﻿namespace EasyTravel.Services
 {
+    using System;
+    using System.Globalization;
+
+    using EasyTravel.Common;
+
     public class DateTimeParserService : IDateTimeParserService
     {
         public DateTime ConvertStrings(string date)
