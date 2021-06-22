@@ -65,9 +65,6 @@
 
         public IActionResult Privacy()
         {
-            geoService.GetLatLongFromAddress("Dunav", "Septemvri", "Bulgaria");
-            ;
-
             return this.View();
         }
 

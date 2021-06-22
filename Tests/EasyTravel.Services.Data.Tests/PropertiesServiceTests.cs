@@ -11,7 +11,6 @@
     using EasyTravel.Data.Models;
     using EasyTravel.Data.Repositories;
     using EasyTravel.Services.Mapping;
-    using EasyTravel.Web.ViewModels.AllProperties;
     using Microsoft.EntityFrameworkCore;
     using Moq;
     using Xunit;
