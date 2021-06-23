@@ -57,13 +57,47 @@
                 else
                 {
                     <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
-                        <div>
-                            <p>
-                                @foreach (var provider in Model.ExternalLogins)
+                        <div class="row">
+                            @foreach (var provider in Model.ExternalLogins)
+                            {
+                                if (provider.Name == "Facebook")
                                 {
-                                    <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
+                                    <p class="col-md-6">
+                                        <button type="submit"
+                                                class="shadow btn btn-block btn-facebook text-white"
+                                                style="background-color:#4064AC;border-color:#4064AC;"
+                                                name="provider"
+                                                value="@provider.Name"
+                                                title="Log in using your @provider.DisplayName account">
+                                            <div class="row d-flex justify-content-md-start">
+                                                <div class=" col-3 pl-0">
+                                                    <img src="~/img/faceboo-logo.png" width="20" style="height:25px;width:25px" />
+                                                </div>
+                                                <div class="col-7">@provider.Name</div>
+                                            </div>
+                                        </button>
+                                    </p>
                                 }
-                            </p>
+
+                                else if (provider.Name == "Google")
+                                {
+                                    <p class="col-md-6">
+                                        <button type="submit"
+                                                class="shadow btn btn-block btn-google"
+                                                style="background-color:#fff;border-color:#fff;text-decoration-color:dimgrey"
+                                                name="provider"
+                                                value="@provider.Name"
+                                                title="Log in using your @provider.DisplayName account">
+                                            <div class="row d-flex justify-content-md-start">
+                                                <div class=" col-3">
+                                                    <img src="~/img/google-logo.png" width="20" style="height:25px;width:25px" />
+                                                </div>
+                                                <div class="col-7">@provider.Name</div>
+                                            </div>
+                                        </button>
+                                    </p>
+                                }
+                            }
                         </div>
                     </form>
                 }
