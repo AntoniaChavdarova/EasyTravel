@@ -1,6 +1,7 @@
 ﻿namespace EasyTravel.Web.Controllers
 {
     using System.Diagnostics;
+
     using EasyTravel.Services;
     using EasyTravel.Services.Data;
     using EasyTravel.Web.ViewModels;

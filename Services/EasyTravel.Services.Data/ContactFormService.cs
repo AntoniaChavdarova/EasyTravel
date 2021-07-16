@@ -24,7 +24,6 @@
                 Email = model.Email,
                 Title = model.Title,
                 Content = model.Content,
-
             };
 
             await this.contactRepository.AddAsync(contactFormEntry);

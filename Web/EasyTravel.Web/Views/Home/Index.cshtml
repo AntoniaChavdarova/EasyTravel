@@ -135,25 +135,19 @@
         <script>
             $("#inputlg").autocomplete({
                 source: function (request, response) {
-
                     $.ajax({
-
                         url: "/api/AutoCompleteSearch",
                         dataType: "json",
 
                         data: { search: $("#inputlg").val() },
                         contentType: "application/json; charset=utf-8",
                         success: function (data) {
-
                             response($.map(data, function (item) {
 
                                 console.log(item);
                                 return {
-
                                     label: item.name
-
                                 }
-
                             }));
                         },
 

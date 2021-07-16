@@ -23,7 +23,6 @@ namespace EasyTravel.Web.Controllers
 
         [HttpPost]
         [Authorize]
-        //[IgnoreAntiforgeryToken]
         public async Task<ActionResult<PostRaitingResponseModel>> Post(PostRaitingInputModel input)
         {
             var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;

@@ -4,4 +4,24 @@
 }
 
 <h1>@this.ViewData["Title"]</h1>
-Settings: @this.Model.SettingsCount
+
+<h3>Welcome to Admin Dashboard!</h3>
+
+<div>
+    <a asp-area="Administration" asp-controller="Bookings" asp-action="Index"
+       class="list-group-item list-group-item-action bg-light">Bookings</a>
+
+    <div class="ml-5 my-2">
+        <a class="btn btn-outline-info btn-sm" asp-area="Administration" asp-controller="Bookings" asp-action="Edit">Edit booking</a>
+    </div>
+    <div class="ml-5 my-2">
+        <a class="btn btn-outline-info btn-sm" asp-area="Administration" asp-controller="Bookings" asp-action="Delete">Delete</a>
+    </div>
+
+    <a asp-area="Administration" asp-controller="ContactForms" asp-action="Index"
+       class="list-group-item list-group-item-action bg-light">Messages</a>
+
+    <div class="ml-5 my-2">
+        <a class="btn btn-outline-info btn-sm" asp-area="Administration" asp-controller="ContactForms" asp-action="Details">Add New Category</a>
+    </div>
+</div>

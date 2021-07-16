@@ -3,6 +3,7 @@
     using System;
     using System.Security.Claims;
     using System.Threading.Tasks;
+
     using EasyTravel.Data.Models;
     using EasyTravel.Services;
     using EasyTravel.Services.Data;
