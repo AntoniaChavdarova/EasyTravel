@@ -1,14 +1,11 @@
 ﻿namespace EasyTravel.Web.ViewModels.Bookings
 {
+    using System.ComponentModel.DataAnnotations;
+
     using EasyTravel.Common;
     using EasyTravel.Web.Infrastructure.ValidationAttributes;
-    using EasyTravel.Web.ViewModels.AllProperties;
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using System.Text;
 
-    public class BookingInputModel 
+    public class BookingInputModel
     {
         [Required]
         [ValidateDateString(ErrorMessage = GlobalConstants.ErrorMessages.DateTime)]
@@ -23,7 +20,7 @@
 
         public string PropertyName { get; set; }
 
-        [Range(1, 30)]
+        [MinValueAttribute(1)]
         [Display(Name = "Guests count")]
         public int PeopleCount { get; set; }
 
