@@ -53,17 +53,17 @@
                 options.Password.RequiredUniqueChars = 0;
             });
 
-            services.AddAuthentication()
-                .AddGoogle(options =>
-                {
-                    options.ClientId = this.configuration["App:GoogleClientId"];
-                    options.ClientSecret = this.configuration["App:GoogleClientSecret"];
-                })
-                 .AddFacebook(options =>
-                 {
-                     options.ClientId = this.configuration["App:FacebookClientId"];
-                     options.ClientSecret = this.configuration["App:FacebookClientSecret"];
-                 });
+            //services.AddAuthentication()
+            //    .AddGoogle(options =>
+            //    {
+            //        options.ClientId = this.configuration["App:GoogleClientId"];
+            //        options.ClientSecret = this.configuration["App:GoogleClientSecret"];
+            //    })
+            //     .AddFacebook(options =>
+            //     {
+            //         options.ClientId = this.configuration["App:FacebookClientId"];
+            //         options.ClientSecret = this.configuration["App:FacebookClientSecret"];
+            //     });
 
             services.Configure<CookiePolicyOptions>(
                 options =>
