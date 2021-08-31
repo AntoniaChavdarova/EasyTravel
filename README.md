@@ -56,3 +56,7 @@ Administrator (user role):
 - Bootstrap
 - Ajax
 - jQuery
+
+## Using ASP.NET-MVC-Template developed by: Nikolay Kostov
+https://github.com/NikolayIT/ASP.NET-Core-Template
+## This website has been created solely for educational purposes.
