@@ -4,21 +4,18 @@
 
     using EasyTravel.Data.Common.Repositories;
     using EasyTravel.Data.Models;
-    using EasyTravel.Services.Data;
+
     using Microsoft.AspNetCore.Mvc;
 
     [ApiController]
     [Route("api/[controller]")]
     public class AutoCompleteSearchController : BaseController
     {
-        private readonly ICitiesService citiesService;
         private readonly IDeletableEntityRepository<City> citiesRepository;
 
         public AutoCompleteSearchController(
-            ICitiesService citiesService,
             IDeletableEntityRepository<City> citiesRepository)
         {
-            this.citiesService = citiesService;
             this.citiesRepository = citiesRepository;
         }
 

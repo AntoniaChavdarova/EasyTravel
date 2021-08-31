@@ -14,21 +14,21 @@
         private readonly ICategoriesService categoriesService;
         private readonly IPropertiesService propertiesService;
         private readonly ISearchService searchService;
-        private readonly IGeoService geoService;
+        
 
         public HomeController(
             ICategoriesService categoriesService,
             IPropertiesService propertiesService,
-            ISearchService searchService,
-            IGeoService geoService)
+            ISearchService searchService
+           )
         {
             this.categoriesService = categoriesService;
             this.propertiesService = propertiesService;
             this.searchService = searchService;
-            this.geoService = geoService;
+           
         }
 
-        public IActionResult Index(InputSeacrhViewModel input)
+        public IActionResult Index(InputSearchViewModel input)
         {
             var viewModel = new CategoryListViewModel
             {

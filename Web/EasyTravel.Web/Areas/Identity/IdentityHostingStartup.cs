@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 [assembly: HostingStartup(typeof(EasyTravel.Web.Areas.Identity.IdentityHostingStartup))]
+
 namespace EasyTravel.Web.Areas.Identity
 {
     public class IdentityHostingStartup : IHostingStartup

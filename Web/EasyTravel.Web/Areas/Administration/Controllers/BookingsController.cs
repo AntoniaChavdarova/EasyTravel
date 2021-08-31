@@ -21,8 +21,7 @@
         public BookingsController(
             IDeletableEntityRepository<Booking> bookingsRepository,
             IDeletableEntityRepository<Property> propertiesRepository,
-            IDeletableEntityRepository<ApplicationUser> usersRepository
-            )
+            IDeletableEntityRepository<ApplicationUser> usersRepository)
         {
             this.bookingsRepository = bookingsRepository;
             this.propertiesRepository = propertiesRepository;
@@ -115,7 +114,8 @@
         }
 
         // POST: Administration/Bookings/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost]
+        [ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {

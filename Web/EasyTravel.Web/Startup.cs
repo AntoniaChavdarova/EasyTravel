@@ -53,18 +53,6 @@
                 options.Password.RequiredUniqueChars = 0;
             });
 
-            //services.AddAuthentication()
-            //    .AddGoogle(options =>
-            //    {
-            //        options.ClientId = this.configuration["App:GoogleClientId"];
-            //        options.ClientSecret = this.configuration["App:GoogleClientSecret"];
-            //    })
-            //     .AddFacebook(options =>
-            //     {
-            //         options.ClientId = this.configuration["App:FacebookClientId"];
-            //         options.ClientSecret = this.configuration["App:FacebookClientSecret"];
-            //     });
-
             services.Configure<CookiePolicyOptions>(
                 options =>
                     {
@@ -104,8 +92,6 @@
             services.AddTransient<IContactFormService, ContactFormService>();
             services.AddTransient<IReviewsService, ReviewService>();
             services.AddTransient<ICitiesService, CitiesService>();
-            services.AddTransient<IGeoService, GeoService>();
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

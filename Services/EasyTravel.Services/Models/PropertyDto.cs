@@ -1,16 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace EasyTravel.Services.Models
+﻿namespace EasyTravel.Services.Models
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Text;
+
     public class PropertyDto
     {
         public PropertyDto()
         {
             this.Amenities = new List<string>();
             this.Images = new List<string>();
-
         }
 
         public string Address { get; set; }

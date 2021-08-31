@@ -4,6 +4,7 @@
     using EasyTravel.Data.Models;
     using EasyTravel.Services.Data;
     using EasyTravel.Web.ViewModels.AllProperties;
+
     using Microsoft.AspNetCore.Mvc;
 
     public class PropertiesController : BaseController
@@ -39,15 +40,14 @@
 
         public IActionResult ById(int id)
         {
+           var property = this.propertiesService.GetById<SinglePropertyViewModel>(id);
 
-            var property = this.propertiesService.GetById<SinglePropertyViewModel>(id);
-
-            if (property == null)
-            {
+           if (property == null)
+           {
                 return this.NotFound();
-            }
+           }
 
-            return this.View(property);
+           return this.View(property);
         }
     }
 }

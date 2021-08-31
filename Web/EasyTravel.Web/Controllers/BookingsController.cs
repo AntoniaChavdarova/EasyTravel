@@ -45,7 +45,6 @@
             };
 
             return this.View(viewModel);
-
         }
 
         [Authorize]
