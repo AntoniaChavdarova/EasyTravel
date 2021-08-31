@@ -6,10 +6,9 @@
 
 }
 
-
 <div class="text-center">
 
-    <section class="jumbotron" style="background: url('https://media-exp1.licdn.com/dms/image/C4D1BAQGGdNo6IlDOCQ/company-background_10000/0/1519801807380?e=2159024400&v=beta&t=VWHuXHsmYAXZB4XQn7H63FLLvHjjMfs6CdxCh3HwcCM') no-repeat center center fixed; background-size: cover; height:max-content; width:max-content">
+    <div class="jumbotron" style="background: url('https://media-exp1.licdn.com/dms/image/C4D1BAQGGdNo6IlDOCQ/company-background_10000/0/1519801807380?e=2159024400&v=beta&t=VWHuXHsmYAXZB4XQn7H63FLLvHjjMfs6CdxCh3HwcCM') no-repeat center center fixed; background-size: cover; height:max-content; width:max-content">
         <div class="container">
             <h1 class="display-4 text-light">Welcome to @GlobalConstants.SystemName!</h1>
             <p class="lead text-light">This is the right place if you love to travel or you are looking for new adventures. We offer you a hundred great  places <br> for your stay ! </p>
@@ -21,7 +20,7 @@
                        class="form-control form-control-lg"
                        id="inputlg"
                        autocomplete="off"
-                       placeholder="Search by city..." />
+                       placeholder="Търсене по град" />
                 <span asp-validation-for="CityName" class="text-danger"></span>
 
             </div>
@@ -32,7 +31,7 @@
                        style="background-color:#FF5581;border-radius:0">
             </div>
         </form>
-    </section>
+    </div>
 
 
     <div class="container p-5 ">
@@ -49,12 +48,12 @@
                 @foreach (var category in this.Model.Categories)
                 {
 
-                    <div class="card col-md-4">
+                    <div class="card col-md-6">
 
                         <div class="card-body">
                             <h5 class="card-title">@category.Name</h5>
                             <img class="img-fluid" src="@category.RemoteImageUrl" alt="">
-                            <a asp-controller="Properties" asp-action="GetAllByCategory" asp-route-id="@category.Id" class="btn btn-outline-dark">Go to properties</a>
+                            <a asp-controller="Properties" asp-action="GetAllByCategory" asp-route-id="@category.Id" class="btn btn-outline-dark">Виж повече</a>
                         </div>
                     </div>
                 }
@@ -70,7 +69,7 @@
                 <div class="card-body">
                     <h5 class="card-title">@property.Name <span class="badge badge-primary">@property.AverageRaiting</span></h5>
                     <img class="img-fluid" src="@property.MainImageUrl" alt="">
-                    <a asp-controller="Properties" asp-action="ById" asp-route-id="@property.Id" class="btn btn-primary">Go to property</a>
+                    <a asp-controller="Properties" asp-action="ById" asp-route-id="@property.Id" class="btn btn-primary">Детайли</a>
 
                 </div>
 

@@ -4,8 +4,9 @@
     this.ViewData["Title"] = "Property";
 }
 
-<link href="~/css/button.css" rel="stylesheet" />
-<link href="~/css/comment.css" rel="stylesheet" />
+    <link href="~/css/button.css" rel="stylesheet" />
+    <link href="~/css/comment.css" rel="stylesheet" />
+
 
 <h1 class="display-4">@this.Model.Name</h1>
 <ul class="nav nav-primary nav-tabs d-flex flex-column flex-md-row text-center">
@@ -173,7 +174,7 @@
                             @review.Content
 
                         </p>
-                        <div class="text-muted small"> 
+                        <div class="text-muted small">
                             <time datetime="@review.CreatedOn.ToString("O")"></time>
                         </div>
                         <br>
@@ -182,8 +183,8 @@
                     </div>
 
                     <div class="person-text rel">
-                        <img id="profilePicture" class="rounded-circle img-fluid"  width="86" height="126" src="data:image/*;base64,@(Convert.ToBase64String(review.UserProfilePicture))">
-                        <span>@review.UserUserName</span>                      
+                        <img id="profilePicture" class="rounded-circle img-fluid" width="86" height="126" src="data:image/*;base64,@(Convert.ToBase64String(review.UserProfilePicture))">
+                        <span>@review.UserUserName</span>
                     </div>
 
                 </div>

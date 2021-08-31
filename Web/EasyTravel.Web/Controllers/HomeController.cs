@@ -2,7 +2,6 @@
 {
     using System.Diagnostics;
 
-    using EasyTravel.Services;
     using EasyTravel.Services.Data;
     using EasyTravel.Web.ViewModels;
     using EasyTravel.Web.ViewModels.AllProperties;
@@ -14,18 +13,15 @@
         private readonly ICategoriesService categoriesService;
         private readonly IPropertiesService propertiesService;
         private readonly ISearchService searchService;
-        
 
         public HomeController(
             ICategoriesService categoriesService,
             IPropertiesService propertiesService,
-            ISearchService searchService
-           )
+            ISearchService searchService)
         {
             this.categoriesService = categoriesService;
             this.propertiesService = propertiesService;
             this.searchService = searchService;
-           
         }
 
         public IActionResult Index(InputSearchViewModel input)
