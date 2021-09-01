@@ -11,7 +11,6 @@
 
     public class SinglePropertyViewModel : PropertyBaseViewModel, IMapFrom<Property>, IHaveCustomMappings
     {
-
         public DateTime CreatedOn { get; set; }
 
         public string Description { get; set; }
@@ -24,7 +23,7 @@
 
         public string PhoneNumber { get; set; }
 
-        public string CategoryName { get; set; }     
+        public string CategoryName { get; set; }
 
         public string CityName { get; set; }
 

@@ -24,7 +24,7 @@
             this.searchService = searchService;
         }
 
-        public IActionResult Index(InputSearchViewModel input)
+        public IActionResult Index()
         {
             var viewModel = new CategoryListViewModel
             {

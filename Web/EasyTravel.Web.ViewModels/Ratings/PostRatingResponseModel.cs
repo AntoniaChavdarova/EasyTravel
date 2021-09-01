@@ -2,6 +2,6 @@
 {
     public class PostRatingResponseModel
     {
-        public double AverageRaiting { get; set; }
+        public double AverageRating { get; set; }
     }
 }

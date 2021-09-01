@@ -5,7 +5,6 @@
 
     public class PostRatingInputModel
     {
-
         public int PropertyId { get; set; }
 
         [Range(1, 5)]

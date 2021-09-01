@@ -1,10 +1,8 @@
 ﻿namespace EasyTravel.Web.ViewModels.AllProperties
 {
     using System.ComponentModel.DataAnnotations;
-    using System.Linq;
-    using EasyTravel.Common;  
-    
-    using EasyTravel.Web.ViewModels.Bookings;
+
+    using EasyTravel.Common;
 
     public abstract class PropertyBaseViewModel
     {
@@ -21,6 +19,5 @@
         public string MainImageUrl { get; set; }
 
         public double AverageRaiting { get; set; }
-        
     }
 }

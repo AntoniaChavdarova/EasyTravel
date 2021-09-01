@@ -3,7 +3,6 @@
 @{
     this.ViewData["Title"] = "Easy Travel";
 
-
 }
 
 <div class="text-center">
@@ -33,7 +32,6 @@
         </form>
     </div>
 
-
     <div class="container p-5 ">
         <div class="row">
 
@@ -43,11 +41,8 @@
             }
             else
             {
-
-
                 @foreach (var category in this.Model.Categories)
                 {
-
                     <div class="card col-md-6">
 
                         <div class="card-body">
@@ -63,17 +58,22 @@
     <hr />
     <h2>Homes guests love <i class="fas fa-grin-hearts "></i></h2>
     <div class="owl-carousel owl-theme">
-        @foreach (var property in this.Model.TopRaitings)
+        @if (this.Model.TopRaitings.Count() == 0)
         {
-            <div class="item ">
-                <div class="card-body">
-                    <h5 class="card-title">@property.Name <span class="badge badge-primary">@property.AverageRaiting</span></h5>
-                    <img class="img-fluid" src="@property.MainImageUrl" alt="">
-                    <a asp-controller="Properties" asp-action="ById" asp-route-id="@property.Id" class="btn btn-primary">Детайли</a>
-
+            <h2>There is no top destinations</h2>
+        }
+        else
+        {
+            @foreach (var property in this.Model.TopRaitings)
+            {
+                <div class="item ">
+                    <div class="card-body">
+                        <h5 class="card-title">@property.Name <span class="badge badge-primary">@property.AverageRaiting</span></h5>
+                        <img class="img-fluid" src="@property.MainImageUrl" alt="">
+                        <a asp-controller="Properties" asp-action="ById" asp-route-id="@property.Id" class="btn btn-primary">Детайли</a>
+                    </div>
                 </div>
-
-            </div>
+            }
         }
 
     </div>
@@ -107,52 +107,52 @@
         </div>
     </div>
 
-    </div>
+</div>
 
 
-    @section Scripts{
+@section Scripts{
 
-        <script>
-            $('.owl-carousel').owlCarousel({
-                loop: true,
-                center: true,
-                items: 3,
-                margin: 10,
+    <script>
+        $('.owl-carousel').owlCarousel({
+            loop: true,
+            center: true,
+            items: 3,
+            margin: 10,
 
-                touchDrag: true,
-                nav: true,
-                responsive: {
-                    0: {
-                        items: 3
+            touchDrag: true,
+            nav: true,
+            responsive: {
+                0: {
+                    items: 3
+                },
+
+            }
+        })
+
+    </script>
+
+    <script>
+        $("#inputlg").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: "/api/AutoCompleteSearch",
+                    dataType: "json",
+
+                    data: { search: $("#inputlg").val() },
+                    contentType: "application/json; charset=utf-8",
+                    success: function (data) {
+                        response($.map(data, function (item) {
+
+                            console.log(item);
+                            return {
+                                label: item.name
+                            }
+                        }));
                     },
 
-                }
-            })
+                });
+            }
+        });
+    </script>
 
-        </script>
-
-        <script>
-            $("#inputlg").autocomplete({
-                source: function (request, response) {
-                    $.ajax({
-                        url: "/api/AutoCompleteSearch",
-                        dataType: "json",
-
-                        data: { search: $("#inputlg").val() },
-                        contentType: "application/json; charset=utf-8",
-                        success: function (data) {
-                            response($.map(data, function (item) {
-
-                                console.log(item);
-                                return {
-                                    label: item.name
-                                }
-                            }));
-                        },
-
-                    });
-                }
-            });
-        </script>
-
-    }
+}

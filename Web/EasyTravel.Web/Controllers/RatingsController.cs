@@ -25,8 +25,8 @@
         {
             var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
             await this.ratingService.SetRaitingAsync(input.PropertyId, userId, input.Value);
-            var averageRaiting = this.ratingService.GetAverageVote(input.PropertyId);
-            return new PostRatingResponseModel { AverageRaiting = averageRaiting };
+            var averageRating = this.ratingService.GetAverageVote(input.PropertyId);
+            return new PostRatingResponseModel { AverageRating = averageRating };
         }
     }
 }
