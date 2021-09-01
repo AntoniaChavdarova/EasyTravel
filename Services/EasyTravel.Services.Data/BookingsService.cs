@@ -133,7 +133,6 @@
 
             return false;
 
-
         }
 
         private bool IsCheckOutBettweenExistingReservation(int propertyId, DateTime checkIn, DateTime checkOut)
